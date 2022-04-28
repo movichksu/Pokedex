@@ -1,0 +1,115 @@
+ext {
+    buildTools = '30.0.3'
+    minSdkVersion = 26
+    targetSdkVersion = 31
+    compileSdkVersion = 31
+    kotlin_version = '1.6.10'
+    build_gradle = '7.0.4'
+
+    appСompat = '1.2.0'
+    core = '1.3.2'
+    constraintLayoutVersion = '2.1.3'
+    fragmentVersion = '1.3.0'
+    glideVersion = '4.12.0'
+    activityKtxVersion = '1.2.0'
+
+    ciceroneVersion = '5.0.0'
+
+    retrofitVersion = '2.9.0'
+    loggingInterceptor = '4.3.0'
+
+    hiltVersion = '2.38.1'
+
+    coroutinesVersion = '1.4.2'
+
+    lifecycleVersion = '2.2.0'
+    lifecycleExtensionsVersion = '2.2.0'
+
+    roomVersion = '2.2.6'
+
+    serializationVersion = '1.1.0'
+    serializationConverterVersion = '0.8.0'
+
+    phoneNumberVersion = '8.12.24'
+
+    materialVersion = '1.4.0-alpha02'
+    recyclerVersion = '1.2.0-alpha06'
+    swipeToRefreshVersion = '1.0.0'
+    materialDatePickerVersion = '4.2.3'
+    viewPager2Version = '1.0.0'
+
+    // Logging
+    timberVersion = '4.7.1'
+}
+
+ext {
+    serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion"
+    serializationConverter = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:$serializationConverterVersion"
+
+    // Glide
+    glide = "com.github.bumptech.glide:glide:$glideVersion"
+
+    // Navigation
+    cicerone = "ru.terrakok.cicerone:cicerone:$ciceroneVersion"
+
+    // Network
+    retrofitCore = "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    retrofit = [
+            core              : "com.squareup.retrofit2:retrofit:$retrofitVersion",
+            converterGson     : "com.squareup.retrofit2:converter-gson:$retrofitVersion",
+            loggingInterceptor: "com.squareup.okhttp3:logging-interceptor:$loggingInterceptor"
+    ] // Transitively contains Gson (2.8.2) version.
+
+    // Async
+    coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+
+    // Database
+    roomExtensions = "androidx.room:room-ktx:$roomVersion"
+
+    // Logging
+    timber = "com.jakewharton.timber:timber:$timberVersion"
+
+    phoneNumber = "com.googlecode.libphonenumber:libphonenumber:$phoneNumberVersion"
+    materialDatePicker = "com.wdullaer:materialdatetimepicker:$materialDatePickerVersion"
+    viewPager = "androidx.viewpager2:viewpager2:$viewPager2Version"
+
+    kapt = [
+            glideCompiler: "com.github.bumptech.glide:compiler:$glideVersion",
+            roomCompiler : "androidx.room:room-compiler:$roomVersion",
+            hiltCompiler : "com.google.dagger:hilt-compiler:$hiltVersion"
+    ]
+
+    androidX = [
+            kotlinStdLib    : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
+            appCompat       : "androidx.appcompat:appcompat:$appСompat",
+            coreKtx         : "androidx.core:core-ktx:$core",
+            fragment        : "androidx.fragment:fragment-ktx:$fragmentVersion",
+            activityKtx     : "androidx.activity:activity-ktx:$activityKtxVersion",
+            room            : "androidx.room:room-runtime:$roomVersion"
+    ]
+
+    uiComponents = [
+            material       : "com.google.android.material:material:$materialVersion",
+            constraint     : "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
+            recycler       : "androidx.recyclerview:recyclerview:$recyclerVersion",
+            swipeToRefresh : "androidx.swiperefreshlayout:swiperefreshlayout:$swipeToRefreshVersion"
+    ]
+
+    jetpack = [
+            viewmodel          : "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion",
+            livedata           : "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion",
+            lifecycleCompiler  : "androidx.lifecycle:lifecycle-compiler:$lifecycleVersion",
+            lifecycleExtensions: "androidx.lifecycle:lifecycle-extensions:$lifecycleExtensionsVersion",
+            lifecycleCommon    : "androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion"
+    ]
+
+    hilt = [
+            hilt : "com.google.dagger:hilt-android:$hiltVersion"
+    ]
+
+    test = [
+            junit4   : 'junit:junit:4.+',
+            junit    : 'androidx.test.ext:junit:1.1.3',
+            espresso : 'androidx.test.espresso:espresso-core:3.4.0'
+    ]
+}
