@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">Pokedex</string>
+
+    <!-- Pokemon info tabs -->
+    <string name="tab_about">About</string>
+    <string name="tab_base_stats">Base stats</string>
+    <string name="tab_evolutions">Evolutions</string>
+    <!-- Pokemon info stats tab -->
+    <string name="stat_hp">HP</string>
+    <string name="stat_attack">Attack</string>
+    <string name="stat_defense">Defense</string>
+    <string name="stat_sp_atk">Sp. Atk</string>
+    <string name="stat_sp_def">Sp. Def</string>
+    <string name="stat_speed">Speed</string>
+    <string name="stat_total">Total</string>
+    <string name="title_type_defences">Type defences</string>
+    <!-- Pokemon info about tab -->
+    <string name="about_species">Species</string>
+    <string name="about_height">Height</string>
+    <string name="about_weight">Weight</string>
+    <string name="about_abilities">Abilities</string>
+    <!-- Pkemon info evolution tab -->
+    <string name="title_evolution_chain">Evolution Chain</string>
 </resources>

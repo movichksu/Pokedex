@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dialog_width">290dp</dimen>
+    <dimen name="dialog_text_line_space">0.19dp</dimen>
+    <dimen name="padding_keyboard_on">1dp</dimen>
+    <dimen name="padding_keyboard_off">72dp</dimen>
+    <dimen name="margin_soon_bottomsheet">20dp</dimen>
+    <dimen name="textSize_tabLayout">16sp</dimen>
+    <dimen name="toolbar_height">45dp</dimen>
+
+    <dimen name="image_middle">70dp</dimen>
+    <dimen name="image_big">200dp</dimen>
+
+    <dimen name="indent_0">0dp</dimen>
+    <dimen name="indent_4">4dp</dimen>
+    <dimen name="indent_8">8dp</dimen>
+    <dimen name="indent_12">12dp</dimen>
+    <dimen name="indent_16">16dp</dimen>
+    <dimen name="indent_24">24dp</dimen>
+</resources>
