@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="widget_spinner_attributes">
+        <attr name="hint" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="WidgetToolbar">
+        <attr name="toolbar_type" format="enum">
+            <enum name="simple" value="0" />
+            <enum name="back_arrow" value="1" />
+            <enum name="back_arrow_and_more" value="2" />
+            <enum name="entrance" value="3" />
+            <enum name="exit" value="4" />
+            <enum name="edit" value="5" />
+            <enum name="done" value="6" />
+            <enum name="search" value="7" />
+        </attr>
+        <attr name="toolbar_color_scheme" format="enum">
+            <enum name="transparent" value="0" />
+            <enum name="white" value="1" />
+        </attr>
+        <attr name="toolbar_title" format="string" />
+        <attr name="toolbar_end_text" format="string" />
+    </declare-styleable>
+</resources>
