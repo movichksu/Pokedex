@@ -21,7 +21,7 @@ object ProvidesModule {
     @Provides
     fun providePokemonRepository(
         pokeApi: PokeApi
-    ) = PokemonInteractorImpl(pokeApi)
+    ): PokemonInteractor = PokemonInteractorImpl(pokeApi)
 
     @Singleton
     @Provides

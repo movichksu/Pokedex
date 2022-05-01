@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
+import dagger.hilt.EntryPoint
 
 abstract class BaseFragment : Fragment {
 

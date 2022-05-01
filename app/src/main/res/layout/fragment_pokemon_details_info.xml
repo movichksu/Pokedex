@@ -17,24 +17,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tabIndicatorColor="@color/colorAccent"
+        tools:tabIndicatorColor="@color/colorAccent"
         app:tabSelectedTextColor="@color/colorAccent"
         app:tabTextAppearance="@style/TextAppearance.Regular.16">
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/aboutTab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tab_about" />
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/statsTab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tab_base_stats" />
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/evolutionsTab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tab_evolutions" />

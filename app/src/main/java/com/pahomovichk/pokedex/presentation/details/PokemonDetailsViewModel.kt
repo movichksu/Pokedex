@@ -10,4 +10,12 @@ class PokemonDetailsViewModel@Inject constructor(
     private val router: Router,
 ): ViewModel() {
 
+    fun getPokemonData(id: Int) {
+
+    }
+
+    fun onBackPressed() {
+        router.exit()
+    }
+
 }

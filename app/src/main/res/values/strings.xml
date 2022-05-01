@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Pokedex</string>
-
+    <string name="pokemon_number_format">#%d</string>
     <!-- Pokemon info tabs -->
     <string name="tab_about">About</string>
     <string name="tab_base_stats">Base stats</string>
