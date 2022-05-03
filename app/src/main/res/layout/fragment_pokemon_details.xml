@@ -83,7 +83,7 @@
         android:id="@+id/pokemonImage"
         android:layout_width="@dimen/image_big"
         android:layout_height="@dimen/image_big"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/pokemonNameText"

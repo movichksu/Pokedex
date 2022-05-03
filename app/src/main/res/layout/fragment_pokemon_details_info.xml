@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_rounded_view">
 
-    <com.google.android.material.tabs.TabLayout
+    <com.pahomovichk.pokedex.core.ui.component.BrandedTabLayout
         android:id="@+id/tabLayout"
         style="@style/Theme.Pokedex.MainComponents"
         android:layout_width="match_parent"
@@ -17,31 +17,41 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:tabIndicatorColor="@color/colorAccent"
         app:tabSelectedTextColor="@color/colorAccent"
-        app:tabTextAppearance="@style/TextAppearance.Regular.16">
+        app:tabTextAppearance="@style/TextAppearance.Regular.16"
+        tools:tabIndicatorColor="@color/colorAccent"/>
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tab_about" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tab_base_stats" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tab_evolutions" />
-    </com.google.android.material.tabs.TabLayout>
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
+    <include
+        android:id="@+id/aboutTabContent"
+        layout="@layout/fragment_pokemon_details_about"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/indent_24"
         android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout" />
+
+    <include
+        android:id="@+id/statsTabContent"
+        layout="@layout/fragment_pokemon_details_stats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/indent_24"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout" />
+
+    <include
+        android:id="@+id/evolutionTabContent"
+        layout="@layout/fragment_pokemon_details_evolution"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/indent_24"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tabLayout" />
