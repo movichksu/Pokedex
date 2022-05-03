@@ -1,7 +1,8 @@
 package com.pahomovichk.pokedex.data.network.dto
 
-import java.io.Serializable
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class PokemonList(
     val results: List<Result>
-): Serializable
+)

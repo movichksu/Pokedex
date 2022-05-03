@@ -14,8 +14,8 @@ interface PokeApi {
         @Query("limit") limit: Int = Constants.POKEMONS_LIMIT
     ): PokemonList
 
-    @GET("pokemon/{name}")
+    @GET("pokemon/{id}")
     suspend fun getPokemonInfo(
-        @Path("name") name: String
+        @Path("id") id: Int
     ) : Pokemon
 }

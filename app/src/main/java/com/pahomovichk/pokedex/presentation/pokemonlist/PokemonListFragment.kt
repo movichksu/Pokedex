@@ -8,8 +8,6 @@ import com.pahomovichk.pokedex.core.ui.BaseFragment
 import com.pahomovichk.pokedex.core.utils.extensions.viewBinding
 import com.pahomovichk.pokedex.databinding.FragmentPokemonListBinding
 import com.pahomovichk.pokedex.presentation.pokemonlist.adapter.PokemonItemAdapter
-import dagger.hilt.EntryPoint
-import dagger.hilt.InstallIn
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,9 +19,13 @@ class PokemonListFragment: BaseFragment(R.layout.fragment_pokemon_list) {
 
     private lateinit var pokemonItemAdapter: PokemonItemAdapter
 
+    override fun onFirstLaunch() {
+        super.onFirstLaunch()
+        viewModel.onFirstLaunch()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.onLaunch()
     }
 
     override fun initUI() {

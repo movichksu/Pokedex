@@ -1,13 +1,8 @@
 package com.pahomovichk.pokedex.presentation.pokemonlist
 
-import android.graphics.Bitmap
-import android.graphics.Color
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.palette.graphics.Palette
 import com.pahomovichk.pokedex.app.Screens
 import com.pahomovichk.pokedex.core.utils.ResultResponse
 import com.pahomovichk.pokedex.core.utils.getPokemonImage
@@ -26,7 +21,7 @@ class PokemonListViewModel @Inject constructor(
 
     val pokemonListLiveData = MutableLiveData<List<PokemonItemEtity>>()
 
-    fun onLaunch() {
+    fun onFirstLaunch() {
         getPokemonList()
     }
 
@@ -48,9 +43,6 @@ class PokemonListViewModel @Inject constructor(
                             entry.url.dropLast(1).takeLastWhile { it.isDigit() }
                         } else {
                             entry.url.takeLastWhile { it.isDigit() }
-                        }
-                        if (pokemonId.toInt() <= 10) {
-                            println("POKEMON IS $entry")
                         }
                         PokemonItemEtity(
                             pokemonId.toInt(),

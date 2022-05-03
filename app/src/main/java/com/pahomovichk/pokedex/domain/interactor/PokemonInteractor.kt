@@ -9,5 +9,5 @@ interface PokemonInteractor {
 
     suspend fun getPokemonList(): ResultResponse<PokemonList>
 
-    suspend fun getPokemonInfo(pokemonName: String): ResultResponse<Pokemon>
+    suspend fun getPokemonInfo(id: Int): ResultResponse<Pokemon>
 }

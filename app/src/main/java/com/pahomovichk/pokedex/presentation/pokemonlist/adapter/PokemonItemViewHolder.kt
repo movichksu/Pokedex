@@ -1,12 +1,7 @@
 package com.pahomovichk.pokedex.presentation.pokemonlist.adapter
 
-import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.Color
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
-import androidx.core.content.ContextCompat
-import androidx.core.graphics.alpha
 import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -38,10 +33,9 @@ class PokemonItemViewHolder(
         }
     }
 
-
     private fun setPokemonImages(item: PokemonItemEtity) {
         Glide
-            .with(itemView.context.applicationContext)
+            .with(itemView.context)
             .asBitmap()
             .load(item.imageUrl)
             .diskCacheStrategy(DiskCacheStrategy.DATA)

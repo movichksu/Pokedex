@@ -23,9 +23,9 @@ class PokemonInteractorImpl @Inject constructor(
         return ResultResponse.Success(response)
     }
 
-    override suspend fun getPokemonInfo(pokemonName: String): ResultResponse<Pokemon> {
+    override suspend fun getPokemonInfo(id: Int): ResultResponse<Pokemon> {
         val response = try {
-            pokeApi.getPokemonInfo(pokemonName)
+            pokeApi.getPokemonInfo(id)
         } catch(e: Exception) {
             return ResultResponse.Error("An unknown error occured.")
         }

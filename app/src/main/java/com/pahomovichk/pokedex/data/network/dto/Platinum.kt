@@ -1,5 +1,8 @@
 package com.pahomovichk.pokedex.data.network.dto
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Platinum(
     val back_default: String,
     val back_female: String,
