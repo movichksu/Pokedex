@@ -70,5 +70,6 @@ dependencies {
     implementation timber
     implementation serialization
     androidTestImplementation test.values()
+    implementation 'com.caverock:androidsvg:1.4'
     implementation 'androidx.palette:palette-ktx:1.0.0'
 }
