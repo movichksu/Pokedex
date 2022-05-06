@@ -5,8 +5,13 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import com.pahomovichk.pokedex.app.MainActivity
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
+
+fun Fragment.showProgress(shouldShow: Boolean) {
+    (requireActivity() as MainActivity).showProgress(shouldShow)
+}
 
 fun Fragment.tryToGetString(
     key: String,

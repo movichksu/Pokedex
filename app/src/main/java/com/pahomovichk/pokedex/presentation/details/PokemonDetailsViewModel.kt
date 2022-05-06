@@ -3,12 +3,15 @@ package com.pahomovichk.pokedex.presentation.details
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.pahomovichk.pokedex.core.utils.ResultResponse
+import com.pahomovichk.pokedex.core.utils.net.result.ResultResource
+import com.pahomovichk.pokedex.core.utils.extensions.finally
+import com.pahomovichk.pokedex.core.utils.extensions.onFailure
 import com.pahomovichk.pokedex.data.network.dto.Pokemon
 import com.pahomovichk.pokedex.domain.interactor.PokemonInteractor
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import ru.terrakok.cicerone.Router
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -17,7 +20,7 @@ class PokemonDetailsViewModel@Inject constructor(
     private val interactor: PokemonInteractor
 ): ViewModel() {
 
-    val pokemonDetailsLiveData = MutableLiveData<Pokemon>()
+    val pokemonDetailsLiveData = MutableLiveData<ResultResource<Pokemon>>()
 
     @PokemonInfoTabIndex
     var currentTabIndex = ABOUT_TAB_INDEX
@@ -27,23 +30,11 @@ class PokemonDetailsViewModel@Inject constructor(
     }
 
     fun getPokemonData(id: Int) {
-        println("POKEMON GET DATA")
+        pokemonDetailsLiveData.value = ResultResource.InProgress
         viewModelScope.launch {
-            val result = interactor.getPokemonInfo(id)
-            when(result) {
-                is ResultResponse.Loading -> {
-                    // TODO show loader
-                }
-                is ResultResponse.Success -> {
-                    // TODO hide loader
-                    val entity = result.data!!
-                    pokemonDetailsLiveData.value = entity
-                }
-                is ResultResponse.Error -> {
-                    // TODO hide loader
-                    // TODO show error message
-                }
-            }
+            interactor.getPokemonInfo(id)
+                .onFailure { Timber.e(it) }
+                .finally { pokemonDetailsLiveData.postValue(it) }
         }
     }
 

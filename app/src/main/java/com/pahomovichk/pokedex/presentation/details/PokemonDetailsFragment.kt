@@ -8,15 +8,14 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.pahomovichk.pokedex.R
 import com.pahomovichk.pokedex.core.ui.BaseFragment
-import com.pahomovichk.pokedex.core.utils.extensions.gone
-import com.pahomovichk.pokedex.core.utils.extensions.tryToGetInt
-import com.pahomovichk.pokedex.core.utils.extensions.viewBinding
-import com.pahomovichk.pokedex.core.utils.extensions.visible
+import com.pahomovichk.pokedex.core.utils.EMPTY_STRING
+import com.pahomovichk.pokedex.core.utils.extensions.*
 import com.pahomovichk.pokedex.core.utils.getPokemonArtwork
 import com.pahomovichk.pokedex.data.network.dto.Pokemon
 import com.pahomovichk.pokedex.data.network.dto.Type
 import com.pahomovichk.pokedex.databinding.FragmentPokemonDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_pokemon_details.*
 
 @AndroidEntryPoint
 class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details) {
@@ -54,17 +53,28 @@ class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details) {
     override fun initVM() {
         super.initVM()
         with(viewModel) {
-            pokemonDetailsLiveData.observe(viewLifecycleOwner) { pokemon ->
-                binding.pokemonNameText.text = pokemon.name
-                Glide
-                    .with(requireContext())
-                    .load(getPokemonArtwork(pokemon.id.toString()))
-                    .diskCacheStrategy(DiskCacheStrategy.DATA)
-                    .into(binding.pokemonImage)
-                setPokemonTypes(pokemon.types)
-                setAboutTabContent(pokemon)
-                setStatsTabContent(pokemon)
-                setEvolutionsTabContent(pokemon)
+            pokemonDetailsLiveData.observe(viewLifecycleOwner) { result ->
+                showProgress(false)
+                result
+                    .onProgress { showProgress(true) }
+                    .onSuccess { pokemon ->
+                        binding.pokemonNameText.text = pokemon.name
+                        pokemonIdText.text = getString(R.string.pokemon_number_format, pokemon.id)
+
+                        Glide
+                            .with(requireContext())
+                            .load(getPokemonArtwork(pokemon.id.toString()))
+                            .diskCacheStrategy(DiskCacheStrategy.DATA)
+                            .into(binding.pokemonImage)
+
+                        setPokemonTypes(pokemon.types)
+                        setAboutTabContent(pokemon)
+                        setStatsTabContent(pokemon)
+                        setEvolutionsTabContent(pokemon)
+                    }
+                    .onFailure {
+                        requireContext().toast("Something went wrong")
+                    }
             }
         }
     }
@@ -75,10 +85,10 @@ class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details) {
 
     private fun setAboutTabContent(pokemon: Pokemon) {
         with(binding.info.aboutTabContent) {
-            heightValue.text = getString(R.string.about_weight_value, pokemon.weight)
-            weightValue.text = pokemon.weight.toString()
+            heightValue.text = getString(R.string.about_height_value, pokemon.height)
+            weightValue.text = getString(R.string.about_weight_value, pokemon.weight)
             speciesValue.text = pokemon.species.name
-            var abilities = ""
+            var abilities = EMPTY_STRING
             if (pokemon.abilities.isNotEmpty()) {
                 pokemon.abilities.forEach {
                     abilities += "${it.ability.name}, "

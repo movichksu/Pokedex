@@ -4,13 +4,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pahomovichk.pokedex.app.Screens
-import com.pahomovichk.pokedex.core.utils.ResultResponse
+import com.pahomovichk.pokedex.core.utils.net.result.ResultResource
+import com.pahomovichk.pokedex.core.utils.extensions.finally
+import com.pahomovichk.pokedex.core.utils.extensions.map
+import com.pahomovichk.pokedex.core.utils.extensions.onFailure
 import com.pahomovichk.pokedex.core.utils.getPokemonImage
 import com.pahomovichk.pokedex.data.model.PokemonItemEtity
 import com.pahomovichk.pokedex.domain.interactor.PokemonInteractor
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import ru.terrakok.cicerone.Router
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,7 +23,7 @@ class PokemonListViewModel @Inject constructor(
     private val interactor: PokemonInteractor
 ): ViewModel() {
 
-    val pokemonListLiveData = MutableLiveData<List<PokemonItemEtity>>()
+    val pokemonListLiveData = MutableLiveData<ResultResource<List<PokemonItemEtity>>>()
 
     fun onFirstLaunch() {
         getPokemonList()
@@ -29,16 +33,16 @@ class PokemonListViewModel @Inject constructor(
         router.navigateTo(Screens.PokemonDetails(id, color))
     }
 
+    fun onBackPressed() {
+        router.exit()
+    }
+
     private fun getPokemonList() {
+        pokemonListLiveData.value = ResultResource.InProgress
         viewModelScope.launch {
-            val result = interactor.getPokemonList()
-            when(result) {
-                is ResultResponse.Loading -> {
-                    // TODO show loader
-                }
-                is ResultResponse.Success -> {
-                    // TODO hide loader
-                    val entities = result.data!!.results.mapIndexed { index, entry ->
+            interactor.getPokemonList()
+                .map { pokemons ->
+                    pokemons.results.mapIndexed { index, entry ->
                         val pokemonId = if(entry.url.endsWith("/")) {
                             entry.url.dropLast(1).takeLastWhile { it.isDigit() }
                         } else {
@@ -50,13 +54,9 @@ class PokemonListViewModel @Inject constructor(
                             getPokemonImage(pokemonId)
                         )
                     }
-                    pokemonListLiveData.value = entities
                 }
-                is ResultResponse.Error -> {
-                    // TODO hide loader
-                    // TODO show error message
-                }
-            }
+                .onFailure { Timber.e(it) }
+                .finally { pokemonListLiveData.postValue(it) }
         }
     }
 }
