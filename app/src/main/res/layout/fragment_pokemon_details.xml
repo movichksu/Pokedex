@@ -4,25 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent">
+    tools:background="@color/colorAccent">
 
     <com.pahomovichk.pokedex.core.ui.component.WidgetToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbar_height"
+        android:paddingEnd="@dimen/indent_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:toolbar_color_scheme="transparent"
-        android:paddingEnd="@dimen/indent_24"
         app:toolbar_type="back_arrow_and_more" />
 
     <TextView
         android:id="@+id/pokemonNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/indent_24"
         android:layout_marginTop="4dp"
+        android:paddingStart="@dimen/indent_24"
         android:textAppearance="@style/TextAppearance.Bold.32.LightGray"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
@@ -49,6 +49,7 @@
         android:paddingHorizontal="12dp"
         android:textAppearance="@style/TextAppearance.Regular.14"
         android:textColor="@color/light_grey"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/pokemonNameText"
         tools:text="grass" />
@@ -64,6 +65,7 @@
         android:paddingHorizontal="12dp"
         android:textAppearance="@style/TextAppearance.Regular.14"
         android:textColor="@color/light_grey"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@id/pokemonTypeFirstText"
         app:layout_constraintTop_toBottomOf="@id/pokemonNameText"
         tools:text="electric" />
@@ -74,16 +76,16 @@
         android:layout_width="match_parent"
         android:layout_height="450dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/pokemonImage"
-        android:layout_marginTop="32dp"
         android:layout_width="@dimen/image_big"
         android:layout_height="@dimen/image_big"
+        android:layout_marginTop="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/pokemonNameText"
-        tools:src="@mipmap/ic_launcher"/>
+        tools:src="@mipmap/ic_launcher" />
 </androidx.constraintlayout.widget.ConstraintLayout>

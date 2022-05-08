@@ -18,6 +18,8 @@ class WidgetProgress(context: Context, attrs: AttributeSet?) : FrameLayout(conte
         setBackgroundColor(ContextCompat.getColor(context, R.color.black))
         isClickable = true
         isFocusableInTouchMode = true
+        isFocusable = true
+        translationZ = TRANSLATION_Z
     }
 
     fun showProgress(show: Boolean) {
@@ -29,6 +31,7 @@ class WidgetProgress(context: Context, attrs: AttributeSet?) : FrameLayout(conte
     }
 
     companion object {
-        private const val PROGRESS_BACKGROUND_ALPHA = 0.4f
+        private const val PROGRESS_BACKGROUND_ALPHA = 0.6f
+        private const val TRANSLATION_Z = 10f
     }
 }

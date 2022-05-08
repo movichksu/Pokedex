@@ -12,7 +12,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 interface BindsModule {
 
-    @Singleton
-    @Binds
-    fun bindInteractor(impl: PokemonInteractorImpl): PokemonInteractor
+//    @Singleton
+//    @Binds
+//    fun bindInteractor(impl: PokemonInteractorImpl): PokemonInteractor
 }

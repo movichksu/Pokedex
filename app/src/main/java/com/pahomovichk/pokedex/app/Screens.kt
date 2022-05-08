@@ -11,8 +11,12 @@ object Screens {
         override fun getFragment() = PokemonListFragment()
     }
 
-    object PokemonDetails : SupportAppScreen() {
+    data class PokemonDetails(
+        private val id: Int,
+        private val color: Int
+    ) : SupportAppScreen() {
 
-        override fun getFragment() = PokemonDetailsFragment()
+        override fun getFragment() =
+            PokemonDetailsFragment.newInstance(id, color)
     }
 }
