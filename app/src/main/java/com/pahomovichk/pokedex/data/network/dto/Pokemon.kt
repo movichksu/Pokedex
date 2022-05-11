@@ -4,22 +4,17 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Pokemon(
-    val abilities: List<Ability>,
-    val base_experience: Int,
-    val forms: List<Form>,
-    val game_indices: List<GameIndice>,
-    val height: Int,
-    val held_items: List<HeldItem>,
     val id: Int,
-    val is_default: Boolean,
-    val location_area_encounters: String,
-    val moves: List<Move>,
     val name: String,
+    val base_experience: Int,
+    val types: List<Type>,
+    val height: Int,
+    val weight: Int,
+    val abilities: List<Ability>,
+    val stats: List<Stat>,
+    val forms: List<Form>,
+    val is_default: Boolean,
     val order: Int,
-    val past_types: List<Any>,
     val species: Species,
     val sprites: Sprites,
-    val stats: List<Stat>,
-    val types: List<Type>,
-    val weight: Int
 )

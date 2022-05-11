@@ -9,7 +9,7 @@ import com.pahomovichk.pokedex.core.utils.extensions.finally
 import com.pahomovichk.pokedex.core.utils.extensions.map
 import com.pahomovichk.pokedex.core.utils.extensions.onFailure
 import com.pahomovichk.pokedex.core.utils.getPokemonImage
-import com.pahomovichk.pokedex.data.model.PokemonItemEtity
+import com.pahomovichk.pokedex.data.model.PokemonItem
 import com.pahomovichk.pokedex.domain.interactor.PokemonInteractor
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -23,7 +23,7 @@ class PokemonListViewModel @Inject constructor(
     private val interactor: PokemonInteractor
 ): ViewModel() {
 
-    val pokemonListLiveData = MutableLiveData<ResultResource<List<PokemonItemEtity>>>()
+    val pokemonListLiveData = MutableLiveData<ResultResource<List<PokemonItem>>>()
 
     fun onFirstLaunch() {
         getPokemonList()
@@ -48,7 +48,7 @@ class PokemonListViewModel @Inject constructor(
                         } else {
                             entry.url.takeLastWhile { it.isDigit() }
                         }
-                        PokemonItemEtity(
+                        PokemonItem(
                             pokemonId.toInt(),
                             entry.name,
                             getPokemonImage(pokemonId)
