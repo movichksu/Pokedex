@@ -27,8 +27,8 @@
     <string name="about_height">Height</string>
     <string name="about_weight">Weight</string>
     <string name="about_abilities">Abilities</string>
-    <string name="about_height_value">%d cm</string>
-    <string name="about_weight_value">%d kg</string>
+    <string name="about_height_value">%.1f m</string>
+    <string name="about_weight_value">%.1f kg</string>
 
     <!-- Pkemon info evolution tab -->
     <string name="title_evolution_chain">Evolution Chain</string>

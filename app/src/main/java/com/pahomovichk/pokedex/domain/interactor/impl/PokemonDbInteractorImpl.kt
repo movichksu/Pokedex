@@ -24,6 +24,9 @@ class PokemonDbInteractorImpl @Inject constructor(
                 if (list.isNotEmpty()) {
                     val mappedPokemons = list.mapToPokemonEntity()
                     dao.insert(mappedPokemons)
+                    mappedPokemons.forEach {
+                        println("POKEMONS WRITE TO DB COLOR - ${it.dominant_color}")
+                    }
                 }
             } catch (e: Exception) {
                 return@withContext ResultResource.Failure.Error(e)

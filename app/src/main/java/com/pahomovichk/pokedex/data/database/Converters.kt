@@ -3,6 +3,7 @@ package com.pahomovichk.pokedex.data.database
 import androidx.room.TypeConverter
 import com.pahomovichk.pokedex.core.utils.EMPTY_STRING
 import com.pahomovichk.pokedex.data.database.model.BaseStat
+import com.pahomovichk.pokedex.data.database.model.DominantColor
 import com.pahomovichk.pokedex.data.network.dto.*
 
 class Converters {
@@ -58,4 +59,10 @@ class Converters {
         stats
             .split(",")
             .map { stat -> BaseStat(stat.toInt() ?: 0) }
+
+    @TypeConverter
+    fun fromPathologyStatus(color: DominantColor) = color.name
+
+    @TypeConverter
+    fun toPathologyStatus(color: String): DominantColor = enumValueOf(color)
 }

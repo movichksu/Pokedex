@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey
 import com.pahomovichk.pokedex.core.utils.Constants.POKEMONS_TABLE_NAME
 import com.pahomovichk.pokedex.data.network.dto.AbilityX
 import com.pahomovichk.pokedex.data.network.dto.TypeX
+import java.io.Serializable
 
 @Entity(tableName = POKEMONS_TABLE_NAME)
 data class PokemonEntity (
@@ -17,11 +18,11 @@ data class PokemonEntity (
     @ColumnInfo(name = "genera")
     val genera: String,
     @ColumnInfo(name = "height")
-    val height: Int,
+    val height: Float,
     @ColumnInfo(name = "weight")
-    val weight: Int,
+    val weight: Float,
     @ColumnInfo(name = "dominant_color")
-    val dominant_color: Int,
+    val dominant_color: DominantColor,
     @ColumnInfo(name = "is_favourite")
     val is_favourite: Boolean,
     @ColumnInfo(name = "abilities")
@@ -32,4 +33,4 @@ data class PokemonEntity (
     val stats: List<BaseStat>,
     @ColumnInfo(name = "description")
     val description: String
-)
+): Serializable

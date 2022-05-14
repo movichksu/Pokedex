@@ -32,6 +32,7 @@ class PokemonNetworkInteractorImpl @Inject constructor(
                     launch {
                         val poke = pokeApi.getPokemonInfo(pokemon.name).asSuccess().value
                         val spec = pokeApi.getSpecies(pokemon.name).asSuccess().value
+                        println("POKEMON COLOR IN INTERACTOR IS ${spec.color.name}")
                         newList.add(
                             poke.copy(
                                 capture_rate= spec.capture_rate,

@@ -7,7 +7,7 @@ import com.pahomovichk.pokedex.data.model.PokemonItem
 import com.pahomovichk.pokedex.databinding.ItemPokemonCardBinding
 
 class PokemonItemAdapter(
-    private val onItemClickAction: (Int, Int) -> Unit
+    private val onItemClickAction: (Int) -> Unit
 ) : RecyclerView.Adapter<PokemonItemViewHolder>() {
 
     private val items = mutableListOf<PokemonItem>()

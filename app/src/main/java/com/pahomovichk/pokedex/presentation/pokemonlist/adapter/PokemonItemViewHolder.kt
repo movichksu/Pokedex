@@ -16,7 +16,7 @@ import com.pahomovichk.pokedex.databinding.ItemPokemonCardBinding
 
 class PokemonItemViewHolder(
     private val binding: ItemPokemonCardBinding,
-    private val onItemClickAction: (Int, Int) -> Unit
+    private val onItemClickAction: (Int) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
     private var dominantColor: Int = Color.GRAY
@@ -28,7 +28,7 @@ class PokemonItemViewHolder(
                 root.context.getString(R.string.pokemon_number_format, item.id)
             setPokemonImages(item)
             root.setOnClickListener {
-                onItemClickAction.invoke(item.id, dominantColor)
+                onItemClickAction.invoke(item.id)
             }
         }
     }
