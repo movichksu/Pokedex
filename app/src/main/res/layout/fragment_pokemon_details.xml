@@ -70,6 +70,16 @@
         app:layout_constraintTop_toBottomOf="@id/pokemonNameText"
         tools:text="electric" />
 
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="400dp"
+        android:layout_height="300dp"
+        android:alpha="0.15"
+        android:src="@drawable/ic_pokeball"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pokemonNameText" />
+
     <include
         android:id="@+id/info"
         layout="@layout/fragment_pokemon_details_info"
@@ -86,6 +96,5 @@
         android:layout_marginTop="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/pokemonNameText"
-        tools:src="@mipmap/ic_launcher" />
+        app:layout_constraintTop_toBottomOf="@id/pokemonNameText" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,7 +9,7 @@ import com.pahomovichk.pokedex.core.utils.net.result.ResultResource
 import com.pahomovichk.pokedex.core.utils.extensions.finally
 import com.pahomovichk.pokedex.core.utils.extensions.map
 import com.pahomovichk.pokedex.core.utils.extensions.onFailure
-import com.pahomovichk.pokedex.core.utils.getPokemonImage
+import com.pahomovichk.pokedex.core.utils.getPokemonLargePngImage
 import com.pahomovichk.pokedex.data.database.model.PokemonEntity
 import com.pahomovichk.pokedex.data.model.PokemonItem
 import com.pahomovichk.pokedex.domain.interactor.PokemonDbInteractor
@@ -58,7 +58,7 @@ class PokemonListViewModel @Inject constructor(
                         PokemonItem(
                             entry.id,
                             entry.name,
-                            getPokemonImage(entry.id.toString())
+                            getPokemonLargePngImage(entry.id.toString())
                         )
                     }
                 }

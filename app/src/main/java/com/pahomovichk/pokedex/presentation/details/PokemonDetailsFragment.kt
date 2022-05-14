@@ -11,14 +11,11 @@ import com.pahomovichk.pokedex.core.ui.BaseFragment
 import com.pahomovichk.pokedex.core.ui.coloring.parseToColor
 import com.pahomovichk.pokedex.core.utils.EMPTY_STRING
 import com.pahomovichk.pokedex.core.utils.extensions.*
-import com.pahomovichk.pokedex.core.utils.getPokemonArtwork
+import com.pahomovichk.pokedex.core.utils.getPokemonLargePngImage
 import com.pahomovichk.pokedex.data.database.model.PokemonEntity
-import com.pahomovichk.pokedex.data.network.dto.Pokemon
-import com.pahomovichk.pokedex.data.network.dto.Type
 import com.pahomovichk.pokedex.data.network.dto.TypeX
 import com.pahomovichk.pokedex.databinding.FragmentPokemonDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_pokemon_details.*
 
 @AndroidEntryPoint
 class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details) {
@@ -54,7 +51,7 @@ class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details) {
 
             Glide
                 .with(requireContext())
-                .load(getPokemonArtwork(pokemon.id.toString()))
+                .load(getPokemonLargePngImage(pokemon.id.toString()))
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
                 .into(pokemonImage)
 
