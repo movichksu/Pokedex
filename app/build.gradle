@@ -42,6 +42,8 @@ android {
 }
 
 dependencies {
+    // поддержка функций room для macOS на M1
+    kapt "org.xerial:sqlite-jdbc:3.34.0"
 
     // compilers
     kapt kapt.values()

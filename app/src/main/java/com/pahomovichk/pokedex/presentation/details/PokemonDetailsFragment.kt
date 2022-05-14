@@ -87,7 +87,6 @@ class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details) {
         with(binding.info.aboutTabContent) {
             heightValue.text = getString(R.string.about_height_value, pokemon.height)
             weightValue.text = getString(R.string.about_weight_value, pokemon.weight)
-            speciesValue.text = pokemon.species.name
             var abilities = EMPTY_STRING
             if (pokemon.abilities.isNotEmpty()) {
                 pokemon.abilities.forEach {

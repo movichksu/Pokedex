@@ -85,7 +85,8 @@ ext {
             coreKtx         : "androidx.core:core-ktx:$core",
             fragment        : "androidx.fragment:fragment-ktx:$fragmentVersion",
             activityKtx     : "androidx.activity:activity-ktx:$activityKtxVersion",
-            room            : "androidx.room:room-runtime:$roomVersion"
+            room            : "androidx.room:room-runtime:$roomVersion",
+            roomKtx         : "androidx.room:room-ktx:$roomVersion"
     ]
 
     uiComponents = [

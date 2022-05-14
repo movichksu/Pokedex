@@ -2,6 +2,11 @@
     <string name="app_name">Pokedex</string>
     <string name="pokemon_number_format">#%d</string>
 
+    <!-- Error messages -->
+    <string name="error_message_getting_data_from_server">Something went wrong. Server is not available.</string>
+    <string name="error_message_getting_data_from_db">Something went wrong. Please, try to clean db cache.</string>
+    <string name="error_message_write_data_to_database">Something went wrong. Please, try to clean db cache.</string>
+
     <!-- Pokemon info tabs -->
     <string name="tab_about">About</string>
     <string name="tab_base_stats">Base stats</string>

@@ -17,6 +17,11 @@ sealed class ResultResource<out T> {
             override val statusMessage: String? = null,
             override val url: String? = null
         ) : Success<T>(), Response
+
+        object Empty : Success<Nothing>() {
+            override val value: Nothing get() = error("No value")
+            override fun toString() = "Success"
+        }
     }
 
     sealed class Failure(val error: Exception) : ResultResource<Nothing>() {
@@ -28,3 +33,5 @@ sealed class ResultResource<out T> {
 
     object InProgress : ResultResource<Nothing>()
 }
+
+typealias EmptyResult = ResultResource<Nothing>

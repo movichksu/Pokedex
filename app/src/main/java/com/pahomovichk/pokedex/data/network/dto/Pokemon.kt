@@ -10,11 +10,12 @@ data class Pokemon(
     val types: List<Type>,
     val height: Int,
     val weight: Int,
+    val capture_rate: Int? = null,
     val abilities: List<Ability>,
     val stats: List<Stat>,
     val forms: List<Form>,
     val is_default: Boolean,
     val order: Int,
-    val species: Species,
     val sprites: Sprites,
+    val color: String? = null
 )

@@ -7,7 +7,7 @@ import com.pahomovichk.pokedex.core.utils.net.result.ResultResource
 import com.pahomovichk.pokedex.core.utils.extensions.finally
 import com.pahomovichk.pokedex.core.utils.extensions.onFailure
 import com.pahomovichk.pokedex.data.network.dto.Pokemon
-import com.pahomovichk.pokedex.domain.interactor.PokemonInteractor
+import com.pahomovichk.pokedex.domain.interactor.PokemonNetworkInteractor
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import ru.terrakok.cicerone.Router
@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class PokemonDetailsViewModel@Inject constructor(
     private val router: Router,
-    private val interactor: PokemonInteractor
+    private val interactor: PokemonNetworkInteractor
 ): ViewModel() {
 
     val pokemonDetailsLiveData = MutableLiveData<ResultResource<Pokemon>>()

@@ -10,7 +10,7 @@ import com.pahomovichk.pokedex.core.utils.extensions.map
 import com.pahomovichk.pokedex.core.utils.extensions.onFailure
 import com.pahomovichk.pokedex.core.utils.getPokemonImage
 import com.pahomovichk.pokedex.data.model.PokemonItem
-import com.pahomovichk.pokedex.domain.interactor.PokemonInteractor
+import com.pahomovichk.pokedex.domain.interactor.PokemonDbInteractor
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import ru.terrakok.cicerone.Router
@@ -20,7 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class PokemonListViewModel @Inject constructor(
     private val router: Router,
-    private val interactor: PokemonInteractor
+    private val dbInteractor: PokemonDbInteractor
 ): ViewModel() {
 
     val pokemonListLiveData = MutableLiveData<ResultResource<List<PokemonItem>>>()
@@ -40,18 +40,13 @@ class PokemonListViewModel @Inject constructor(
     private fun getPokemonList() {
         pokemonListLiveData.value = ResultResource.InProgress
         viewModelScope.launch {
-            interactor.getPokemonList()
+            dbInteractor.getPokemosList()
                 .map { pokemons ->
-                    pokemons.results.mapIndexed { index, entry ->
-                        val pokemonId = if(entry.url.endsWith("/")) {
-                            entry.url.dropLast(1).takeLastWhile { it.isDigit() }
-                        } else {
-                            entry.url.takeLastWhile { it.isDigit() }
-                        }
+                    pokemons.mapIndexed { index, entry ->
                         PokemonItem(
-                            pokemonId.toInt(),
+                            entry.id,
                             entry.name,
-                            getPokemonImage(pokemonId)
+                            getPokemonImage(entry.id.toString())
                         )
                     }
                 }
