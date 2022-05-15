@@ -4,6 +4,8 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
+import android.view.*
+import android.widget.PopupMenu
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
@@ -26,7 +28,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import com.github.mikephil.charting.formatter.ValueFormatter
 
 @AndroidEntryPoint
-class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details) {
+class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details),
+    PopupMenu.OnMenuItemClickListener {
 
     private val binding by viewBinding { FragmentPokemonDetailsBinding.bind(requireView()) }
 
@@ -44,6 +47,9 @@ class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details) {
         with(binding) {
             root.setBackgroundColor(getColor(pokemon.dominant_color.parseToColor()))
             toolbar.setNavigationOnClickListener { onBackPressed() }
+            toolbar.setOnEndIconClickListener {
+                showMenu()
+            }
             info.tabLayout.apply {
                 addTabs(
                     getString(R.string.tab_about),
@@ -81,6 +87,33 @@ class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details) {
 
     override fun onBackPressed() {
         viewModel.onBackPressed()
+    }
+
+    override fun onMenuItemClick(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.addPokemonToFavourites -> {
+                //
+                true
+            }
+            R.id.sharePokemon -> {
+                //
+                true
+            }
+
+            R.id.openPokemonModel -> {
+                //
+                true
+            }
+            else -> false
+        }
+    }
+
+    private fun showMenu() {
+        PopupMenu(requireContext(), binding.toolbar.getEndIconView()).apply {
+            setOnMenuItemClickListener(this@PokemonDetailsFragment)
+            inflate(R.menu.pokemon_details_menu)
+            show()
+        }
     }
 
     private fun setAboutTabContent(pokemon: PokemonEntity) {

@@ -1,8 +1,12 @@
 package com.pahomovichk.pokedex.presentation.details
 
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.pahomovichk.pokedex.R
 import com.pahomovichk.pokedex.core.utils.net.result.ResultResource
 import com.pahomovichk.pokedex.core.utils.extensions.finally
 import com.pahomovichk.pokedex.core.utils.extensions.onFailure
@@ -30,5 +34,4 @@ class PokemonDetailsViewModel@Inject constructor(
     fun onBackPressed() {
         router.exit()
     }
-
 }
