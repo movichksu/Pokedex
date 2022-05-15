@@ -32,8 +32,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/indent_12"
             android:layout_marginEnd="@dimen/indent_12"
-            android:alpha="0.5"
-            android:textAppearance="@style/TextAppearance.Bold.16"
+            android:alpha="0.7"
+            android:textAppearance="@style/TextAppearance.Bold.16.LightGray"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="#001" />

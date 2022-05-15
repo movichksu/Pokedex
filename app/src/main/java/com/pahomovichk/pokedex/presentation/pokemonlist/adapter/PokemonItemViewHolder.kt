@@ -11,29 +11,29 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.pahomovichk.pokedex.R
-import com.pahomovichk.pokedex.data.model.PokemonItemEtity
+import com.pahomovichk.pokedex.data.model.PokemonItem
 import com.pahomovichk.pokedex.databinding.ItemPokemonCardBinding
 
 class PokemonItemViewHolder(
     private val binding: ItemPokemonCardBinding,
-    private val onItemClickAction: (Int, Int) -> Unit
+    private val onItemClickAction: (Int) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
     private var dominantColor: Int = Color.GRAY
 
-    fun bindView(item: PokemonItemEtity) {
+    fun bindView(item: PokemonItem) {
         with(binding) {
             pokemonNameText.text = item.pokemonName
             pokemonIdText.text =
                 root.context.getString(R.string.pokemon_number_format, item.id)
             setPokemonImages(item)
             root.setOnClickListener {
-                onItemClickAction.invoke(item.id, dominantColor)
+                onItemClickAction.invoke(item.id)
             }
         }
     }
 
-    private fun setPokemonImages(item: PokemonItemEtity) {
+    private fun setPokemonImages(item: PokemonItem) {
         Glide
             .with(itemView.context)
             .asBitmap()

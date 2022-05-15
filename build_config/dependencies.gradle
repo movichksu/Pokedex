@@ -37,6 +37,8 @@ ext {
     swipeToRefreshVersion = '1.0.0'
     materialDatePickerVersion = '4.2.3'
     viewPager2Version = '1.0.0'
+    androidSvgVersion = '1.4'
+    paletteVersion = '1.0.0'
 
     // Logging
     timberVersion = '4.7.1'
@@ -85,14 +87,17 @@ ext {
             coreKtx         : "androidx.core:core-ktx:$core",
             fragment        : "androidx.fragment:fragment-ktx:$fragmentVersion",
             activityKtx     : "androidx.activity:activity-ktx:$activityKtxVersion",
-            room            : "androidx.room:room-runtime:$roomVersion"
+            room            : "androidx.room:room-runtime:$roomVersion",
+            roomKtx         : "androidx.room:room-ktx:$roomVersion"
     ]
 
     uiComponents = [
             material       : "com.google.android.material:material:$materialVersion",
             constraint     : "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
             recycler       : "androidx.recyclerview:recyclerview:$recyclerVersion",
-            swipeToRefresh : "androidx.swiperefreshlayout:swiperefreshlayout:$swipeToRefreshVersion"
+            swipeToRefresh : "androidx.swiperefreshlayout:swiperefreshlayout:$swipeToRefreshVersion",
+            androidSvg     : "com.caverock:androidsvg:$androidSvgVersion",
+            palette        : "androidx.palette:palette-ktx:$paletteVersion"
     ]
 
     jetpack = [

@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: "kotlinx-serialization"
 
 apply from: "$project.rootDir/build_config/dependencies.gradle"
 
@@ -41,6 +42,8 @@ android {
 }
 
 dependencies {
+    // поддержка функций room для macOS на M1
+    kapt "org.xerial:sqlite-jdbc:3.34.0"
 
     // compilers
     kapt kapt.values()
@@ -70,6 +73,6 @@ dependencies {
     implementation timber
     implementation serialization
     androidTestImplementation test.values()
-    implementation 'com.caverock:androidsvg:1.4'
-    implementation 'androidx.palette:palette-ktx:1.0.0'
+
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

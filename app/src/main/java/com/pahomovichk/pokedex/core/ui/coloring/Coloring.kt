@@ -1,6 +1,7 @@
 package com.pahomovichk.pokedex.core.ui.coloring
 
 import com.pahomovichk.pokedex.R
+import com.pahomovichk.pokedex.data.database.model.DominantColor
 
 fun String.typeToColor(): Int =
     when (this) {
@@ -22,5 +23,20 @@ fun String.typeToColor(): Int =
         "dragon" -> R.color.type_dragon
         "dark" -> R.color.type_dark
         "fairy" -> R.color.type_fairy
+        else -> R.color.type_normal
+    }
+
+fun DominantColor.parseToColor(): Int =
+    when(this) {
+        DominantColor.BLACK -> R.color.type_dark
+        DominantColor.BLUE -> R.color.type_water
+        DominantColor.BROWN -> R.color.type_rock
+        DominantColor.GRAY -> R.color.type_normal
+        DominantColor.GREEN -> R.color.type_grass
+        DominantColor.PINK -> R.color.type_psychic
+        DominantColor.PURPLE -> R.color.type_ghost
+        DominantColor.RED -> R.color.type_fire
+        DominantColor.WHITE -> R.color.type_steal
+        DominantColor.YELLOW -> R.color.type_electric
         else -> R.color.type_normal
     }

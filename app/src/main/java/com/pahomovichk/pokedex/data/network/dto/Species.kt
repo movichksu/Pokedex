@@ -4,6 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Species(
-    val name: String,
-    val url: String
+    val capture_rate: Int,
+    val color: Color
 )

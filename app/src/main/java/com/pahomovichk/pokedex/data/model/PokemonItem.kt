@@ -1,8 +1,6 @@
 package com.pahomovichk.pokedex.data.model
 
-import android.graphics.Color
-
-data class PokemonItemEtity(
+data class PokemonItem(
     val id: Int,
     val pokemonName: String,
     val imageUrl: String

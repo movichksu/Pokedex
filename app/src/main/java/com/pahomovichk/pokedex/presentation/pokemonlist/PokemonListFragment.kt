@@ -30,8 +30,8 @@ class PokemonListFragment: BaseFragment(R.layout.fragment_pokemon_list) {
 
     override fun initUI() {
         with(binding) {
-            pokemonItemAdapter = PokemonItemAdapter { id, dominantColor ->
-                viewModel.onPokemonItemClicked(id, dominantColor)
+            pokemonItemAdapter = PokemonItemAdapter { id ->
+                viewModel.onPokemonItemClicked(id)
             }
             pokemonRecycler.adapter = pokemonItemAdapter
         }
@@ -48,7 +48,20 @@ class PokemonListFragment: BaseFragment(R.layout.fragment_pokemon_list) {
                         pokemonItemAdapter.setItems(list)
                     }
                     .onFailure {
-                        requireContext().toast("Something went wrong!")
+                        requireContext().toast(
+                            getString(R.string.error_message_getting_data_from_db)
+                        )
+                    }
+            }
+            getPokemonEntityLiveEvent.observe(viewLifecycleOwner) { result ->
+                showProgress(false)
+                result
+                    .onProgress { showProgress(true) }
+                    .onSuccess { onGotPokemonEntity(it) }
+                    .onFailure {
+                        requireContext().toast(
+                            getString(R.string.error_message_getting_data_from_db)
+                        )
                     }
             }
         }

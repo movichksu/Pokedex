@@ -2,6 +2,11 @@
     <string name="app_name">Pokedex</string>
     <string name="pokemon_number_format">#%d</string>
 
+    <!-- Error messages -->
+    <string name="error_message_getting_data_from_server">Something went wrong. Server is not available.</string>
+    <string name="error_message_getting_data_from_db">Something went wrong. Please, try to clean db cache.</string>
+    <string name="error_message_write_data_to_database">Something went wrong. Please, try to clean db cache.</string>
+
     <!-- Pokemon info tabs -->
     <string name="tab_about">About</string>
     <string name="tab_base_stats">Base stats</string>
@@ -15,15 +20,15 @@
     <string name="stat_sp_def">Sp. Def</string>
     <string name="stat_speed">Speed</string>
     <string name="stat_total">Total</string>
-    <string name="title_type_defences">Type defences</string>
+    <string name="total_value">Total value: %d</string>
 
     <!-- Pokemon info about tab -->
     <string name="about_species">Species</string>
     <string name="about_height">Height</string>
     <string name="about_weight">Weight</string>
     <string name="about_abilities">Abilities</string>
-    <string name="about_height_value">%d cm</string>
-    <string name="about_weight_value">%d kg</string>
+    <string name="about_height_value">%.1f m</string>
+    <string name="about_weight_value">%.1f kg</string>
 
     <!-- Pkemon info evolution tab -->
     <string name="title_evolution_chain">Evolution Chain</string>

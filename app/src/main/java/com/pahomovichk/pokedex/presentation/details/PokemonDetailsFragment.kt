@@ -1,22 +1,31 @@
 package com.pahomovichk.pokedex.presentation.details
 
+import android.graphics.Color
 import android.os.Bundle
+import android.view.View
+import androidx.core.content.ContextCompat
 import android.view.*
 import android.widget.PopupMenu
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.github.mikephil.charting.charts.HorizontalBarChart
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
 import com.pahomovichk.pokedex.R
 import com.pahomovichk.pokedex.core.ui.BaseFragment
+import com.pahomovichk.pokedex.core.ui.coloring.parseToColor
 import com.pahomovichk.pokedex.core.utils.EMPTY_STRING
 import com.pahomovichk.pokedex.core.utils.extensions.*
-import com.pahomovichk.pokedex.core.utils.getPokemonArtwork
-import com.pahomovichk.pokedex.data.network.dto.Pokemon
-import com.pahomovichk.pokedex.data.network.dto.Type
+import com.pahomovichk.pokedex.core.utils.getPokemonLargePngImage
+import com.pahomovichk.pokedex.data.database.model.PokemonEntity
+import com.pahomovichk.pokedex.data.network.dto.TypeX
 import com.pahomovichk.pokedex.databinding.FragmentPokemonDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_pokemon_details.*
+import com.github.mikephil.charting.formatter.ValueFormatter
 
 @AndroidEntryPoint
 class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details),
@@ -26,16 +35,17 @@ class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details),
 
     private val viewModel by viewModels<PokemonDetailsViewModel>()
 
-    private val dominantColor: Int by lazy { tryToGetInt(DOMINANT_COLOR_KEY) }
+    private val pokemon by lazy { tryToGetSerializable<PokemonEntity>(POKEMON_KEY) }
+
+    private val barChartList = arrayListOf<BarEntry>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getPokemonData(tryToGetInt(POKEMON_ID_KEY))
     }
 
     override fun initUI() {
         with(binding) {
-            root.setBackgroundColor(dominantColor)
+            root.setBackgroundColor(getColor(pokemon.dominant_color.parseToColor()))
             toolbar.setNavigationOnClickListener { onBackPressed() }
             toolbar.setOnEndIconClickListener {
                 showMenu()
@@ -49,38 +59,29 @@ class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details),
                     viewModel.onTabSelected(tabIndex)
                     onTabSelected()
                 }
-                applyColorScheme(dominantColor)
+                applyColorScheme(getColor(pokemon.dominant_color.parseToColor()))
                 getTabAt(viewModel.currentTabIndex)?.select()
             }
+            pokemonNameText.text = pokemon.name
+            pokemonIdText.text = getString(R.string.pokemon_number_format, pokemon.id)
+
+            Glide
+                .with(requireContext())
+                .load(getPokemonLargePngImage(pokemon.id.toString()))
+                .diskCacheStrategy(DiskCacheStrategy.DATA)
+                .into(pokemonImage)
+
+            setPokemonTypes(pokemon.types)
+            setAboutTabContent(pokemon)
+            setStatsTabContent(pokemon)
+            setEvolutionsTabContent(pokemon)
         }
     }
 
     override fun initVM() {
         super.initVM()
         with(viewModel) {
-            pokemonDetailsLiveData.observe(viewLifecycleOwner) { result ->
-                showProgress(false)
-                result
-                    .onProgress { showProgress(true) }
-                    .onSuccess { pokemon ->
-                        binding.pokemonNameText.text = pokemon.name
-                        pokemonIdText.text = getString(R.string.pokemon_number_format, pokemon.id)
 
-                        Glide
-                            .with(requireContext())
-                            .load(getPokemonArtwork(pokemon.id.toString()))
-                            .diskCacheStrategy(DiskCacheStrategy.DATA)
-                            .into(binding.pokemonImage)
-
-                        setPokemonTypes(pokemon.types)
-                        setAboutTabContent(pokemon)
-                        setStatsTabContent(pokemon)
-                        setEvolutionsTabContent(pokemon)
-                    }
-                    .onFailure {
-                        requireContext().toast("Something went wrong")
-                    }
-            }
         }
     }
 
@@ -115,51 +116,113 @@ class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details),
         }
     }
 
-    private fun setAboutTabContent(pokemon: Pokemon) {
+    private fun setAboutTabContent(pokemon: PokemonEntity) {
         with(binding.info.aboutTabContent) {
             heightValue.text = getString(R.string.about_height_value, pokemon.height)
             weightValue.text = getString(R.string.about_weight_value, pokemon.weight)
-            speciesValue.text = pokemon.species.name
             var abilities = EMPTY_STRING
             if (pokemon.abilities.isNotEmpty()) {
                 pokemon.abilities.forEach {
-                    abilities += "${it.ability.name}, "
+                    abilities += "${it.name}, "
                 }
                 abilitiesValue.text = abilities.dropLast(2)
             }
         }
     }
 
-    private fun setStatsTabContent(pokemon: Pokemon) {
+    private fun setStatsTabContent(pokemon: PokemonEntity) {
         with(binding.info.statsTabContent) {
-            hpValue.text = pokemon.stats[0].base_stat.toString()
-            attackValue.text = pokemon.stats[1].base_stat.toString()
-            defenseValue.text = pokemon.stats[2].base_stat.toString()
-            spAttackValue.text = pokemon.stats[3].base_stat.toString()
-            spDefenseValue.text = pokemon.stats[4].base_stat.toString()
-            speedValue.text = pokemon.stats[5].base_stat.toString()
+            hpValue.text = pokemon.stats[0].stat.toString()
+            attackValue.text = pokemon.stats[1].stat.toString()
+            defenseValue.text = pokemon.stats[2].stat.toString()
+            spAttackValue.text = pokemon.stats[3].stat.toString()
+            spDefenseValue.text = pokemon.stats[4].stat.toString()
+            speedValue.text = pokemon.stats[5].stat.toString()
             var totalStatsValue = 0
-            pokemon.stats.forEach { totalStatsValue += it.base_stat }
-            totalValue.text = totalStatsValue.toString()
+            pokemon.stats.forEach { totalStatsValue += it.stat }
+            totalValue.text = getString(R.string.total_value, totalStatsValue)
+
+            pokemon.stats
+                .asReversed()
+                .forEachIndexed { index, baseStat ->
+                    barChartList.add(BarEntry(index.toFloat(), baseStat.stat.toFloat()))
+                }
         }
     }
 
-    private fun setEvolutionsTabContent(pokemon: Pokemon) {
+    private fun initializeChart(pokemon: PokemonEntity) {
+        val barChart: HorizontalBarChart = binding.info.statsTabContent.horizontalBarChart
+        val legendList = arrayListOf(
+            getString(R.string.stat_hp),
+            getString(R.string.stat_attack),
+            getString(R.string.stat_defense),
+            getString(R.string.stat_sp_atk),
+            getString(R.string.stat_sp_def),
+            getString(R.string.stat_speed)
+        )
+
+        barChart.apply {
+            data = BarData(
+                BarDataSet(barChartList, "Stats").apply {
+                    setDrawValues(false)
+                    color = ContextCompat.getColor(
+                        requireContext(),
+                        pokemon.dominant_color.parseToColor()
+                    )
+                    barShadowColor = CHART_BAR_SHADOW_COLOR
+                }
+            )
+            legend.isEnabled = false
+            description = null
+            xAxis.apply {
+                setDrawGridLines(false)
+                setDrawAxisLine(false)
+                setDrawAxisLine(true)
+                setFitBars(true)
+                textSize = CHART_BAR_TEXT_SIZE
+                textAlignment = View.TEXT_ALIGNMENT_TEXT_START
+                position = XAxis.XAxisPosition.BOTTOM
+                valueFormatter = object : ValueFormatter() {
+                    override fun getFormattedValue(value: Float): String {
+                        return legendList.get(value.toInt())
+                    }
+                }
+            }
+            axisRight.apply {
+                isEnabled = false
+                granularity = CHART_BAR_GRANULARITY
+                setDrawGridLines(false)
+            }
+            axisLeft.apply {
+                isEnabled = false
+                axisMinimum = CHART_BAR_AXIS_MIN
+                granularity = CHART_BAR_GRANULARITY
+                setDrawGridLines(false)
+            }
+            setPinchZoom(false)
+            setDrawGridBackground(false)
+            setDrawBarShadow(true)
+            setDrawValueAboveBar(false)
+            animateY(CHART_BAR_ANIMATION_DURATION)
+        }.invalidate()
+    }
+
+    private fun setEvolutionsTabContent(pokemon: PokemonEntity) {
         with(binding.info.evolutionTabContent) {
 
         }
     }
 
-    private fun setPokemonTypes(types: List<Type>) {
+    private fun setPokemonTypes(types: List<TypeX>) {
         with(binding) {
             if (types.isNotEmpty()) {
                 pokemonTypeFirstText.apply {
-                    text = types[0].type.name
+                    text = types[0].name
                     visible()
                 }
                 if (types.size > 1) {
                     pokemonTypeSecondText.apply {
-                        text = types[1].type.name
+                        text = types[1].name
                         visible()
                     }
                 }
@@ -179,6 +242,7 @@ class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details),
                     aboutTabContent.root.gone()
                     statsTabContent.root.visible()
                     evolutionTabContent.root.gone()
+                    initializeChart(pokemon)
                 }
                 EVOLUTIONS_TAB_INDEX -> {
                     aboutTabContent.root.gone()
@@ -192,13 +256,16 @@ class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details),
 
     companion object {
 
-        private const val POKEMON_ID_KEY = "POKEMON_ID_KEY"
-        private const val DOMINANT_COLOR_KEY = "DOMINANT_COLOR_KEY"
+        private const val POKEMON_KEY = "POKEMON_KEY"
+        private val CHART_BAR_SHADOW_COLOR = Color.argb(40, 150, 150, 150)
+        private const val CHART_BAR_ANIMATION_DURATION = 2000
+        private const val CHART_BAR_GRANULARITY = 10F
+        private const val CHART_BAR_AXIS_MIN = 0F
+        private const val CHART_BAR_TEXT_SIZE = 14F
 
-        fun newInstance(id: Int, color: Int) = PokemonDetailsFragment().apply {
+        fun newInstance(pokemon: PokemonEntity) = PokemonDetailsFragment().apply {
             arguments = bundleOf(
-                POKEMON_ID_KEY to id,
-                DOMINANT_COLOR_KEY to color
+                POKEMON_KEY to pokemon
             )
         }
     }

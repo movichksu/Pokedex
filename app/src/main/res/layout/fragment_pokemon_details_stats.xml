@@ -8,88 +8,12 @@
     android:layout_marginTop="@dimen/indent_16">
 
     <TextView
-        android:id="@+id/hpText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/stat_hp"
-        android:textAppearance="@style/TextAppearance.Regular.14"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/attackText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/indent_8"
-        android:text="@string/stat_attack"
-        android:textAppearance="@style/TextAppearance.Regular.14"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/hpText" />
-
-    <TextView
-        android:id="@+id/defenseText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/indent_8"
-        android:text="@string/stat_defense"
-        android:textAppearance="@style/TextAppearance.Regular.14"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/attackText" />
-
-    <TextView
-        android:id="@+id/spAttackText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/indent_8"
-        android:text="@string/stat_sp_atk"
-        android:textAppearance="@style/TextAppearance.Regular.14"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/defenseText" />
-
-    <TextView
-        android:id="@+id/spDefenseText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/indent_8"
-        android:text="@string/stat_sp_def"
-        android:textAppearance="@style/TextAppearance.Regular.14"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spAttackText" />
-
-    <TextView
-        android:id="@+id/speedText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/indent_8"
-        android:text="@string/stat_speed"
-        android:textAppearance="@style/TextAppearance.Regular.14"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spDefenseText" />
-
-    <TextView
-        android:id="@+id/totalText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/indent_8"
-        android:text="@string/stat_total"
-        android:textAppearance="@style/TextAppearance.Regular.14"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/speedText" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="100dp" />
-
-
-    <TextView
         android:id="@+id/hpValue"
+        android:layout_marginTop="@dimen/indent_24"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.Regular.14"
-        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="45" />
 
@@ -99,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/indent_8"
         android:textAppearance="@style/TextAppearance.Regular.14"
-        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/hpValue"
         tools:text="60" />
 
@@ -109,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/indent_8"
         android:textAppearance="@style/TextAppearance.Regular.14"
-        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/attackValue"
         tools:text="65" />
 
@@ -119,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/indent_8"
         android:textAppearance="@style/TextAppearance.Regular.14"
-        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/defenseValue"
         tools:text="50" />
 
@@ -129,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/indent_8"
         android:textAppearance="@style/TextAppearance.Regular.14"
-        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/spAttackValue"
         tools:text="44" />
 
@@ -139,37 +63,27 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/indent_8"
         android:textAppearance="@style/TextAppearance.Regular.14"
-        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/spDefenseValue"
         tools:text="70" />
+
+    <com.github.mikephil.charting.charts.HorizontalBarChart
+        android:id="@+id/horizontalBarChart"
+        android:layout_width="0dp"
+        android:layout_height="210dp"
+        android:layout_marginStart="@dimen/indent_0"
+        android:layout_marginEnd="@dimen/indent_4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/hpValue"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/totalValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/indent_8"
-        android:textAppearance="@style/TextAppearance.Regular.14"
-        app:layout_constraintStart_toStartOf="@id/guideline"
-        app:layout_constraintTop_toBottomOf="@id/speedValue"
+        android:layout_marginTop="@dimen/indent_12"
+        android:textAppearance="@style/TextAppearance.Medium.16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/horizontalBarChart"
         tools:text="366" />
-
-    <TextView
-        android:id="@+id/typeDefensesTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/indent_16"
-        android:text="@string/title_type_defences"
-        android:textAppearance="@style/TextAppearance.Bold.18"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/totalText" />
-
-    <TextView
-        android:id="@+id/typeDefensesText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/indent_8"
-        android:textAppearance="@style/TextAppearance.Regular.14"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/typeDefensesTitle"
-        tools:text="The effectiveness of each type on Charmander" />
 </androidx.constraintlayout.widget.ConstraintLayout>
