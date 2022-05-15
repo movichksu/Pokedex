@@ -20,7 +20,7 @@
     <string name="stat_sp_def">Sp. Def</string>
     <string name="stat_speed">Speed</string>
     <string name="stat_total">Total</string>
-    <string name="title_type_defences">Type defences</string>
+    <string name="total_value">Total value: %d</string>
 
     <!-- Pokemon info about tab -->
     <string name="about_species">Species</string>

@@ -1,6 +1,7 @@
 package com.pahomovichk.pokedex.core.utils.extensions
 
 import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.DefaultLifecycleObserver
@@ -35,6 +36,8 @@ fun <T> Fragment.tryToGetSerializable(
 ): T = (arguments?.getSerializable(key) as? T) ?: throwArgumentException(exceptionMessage)
 
 fun Fragment.getColor(@ColorRes id: Int) = ContextCompat.getColor(requireContext(), id)
+
+fun Fragment.getDrawable(@DrawableRes id: Int) = ContextCompat.getDrawable(requireContext(), id)
 
 /**
  * Связывание вьюбиндинга с жизненным циклом фрагмента
