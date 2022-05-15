@@ -42,6 +42,8 @@ class WidgetToolbar(context: Context, attrs: AttributeSet?) :
         applyToolbarColors()
     }
 
+    fun getEndIconView() = endIcon
+
     fun setOnEndIconClickListener(listener: () -> Unit) {
         endIconListener = listener
     }

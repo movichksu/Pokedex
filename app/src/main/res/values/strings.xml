@@ -27,4 +27,13 @@
 
     <!-- Pkemon info evolution tab -->
     <string name="title_evolution_chain">Evolution Chain</string>
+
+    <!-- Action names-->
+    <string name="menu_item_add_to_favourites">Add to favourites</string>
+    <string name="menu_item_share">Share</string>
+    <string name="menu_item_open_special_model">Open special model</string>
+    <string name="add_collection">Add to my collection</string>
+    <string name="remove_collection">Remove from my collection</string>
+    <string name="read_article">Read article about pathology</string>
+    <string name="leave_feedback">Leave feedback on 3D model</string>
 </resources>
