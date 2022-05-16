@@ -87,6 +87,11 @@ class WidgetToolbar(context: Context, attrs: AttributeSet?) :
                 setEndIcon(R.drawable.ic_menu)
                 setNavigationIconTint(getColor(context, R.color.light_grey))
             }
+            ToolbarType.BACK_ARROW_AND_DOWNLOAD -> {
+                setNavigationIcon(R.drawable.ic_arrow_back)
+                setEndIcon(R.drawable.ic_download)
+                setNavigationIconTint(getColor(context, R.color.light_grey))
+            }
             ToolbarType.SIMPLE -> { }
         }
     }
@@ -144,4 +149,5 @@ private enum class ToolbarType {
     SIMPLE,
     BACK_ARROW,
     BACK_ARROW_AND_MORE,
+    BACK_ARROW_AND_DOWNLOAD
 }

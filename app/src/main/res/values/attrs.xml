@@ -10,11 +10,7 @@
             <enum name="simple" value="0" />
             <enum name="back_arrow" value="1" />
             <enum name="back_arrow_and_more" value="2" />
-            <enum name="entrance" value="3" />
-            <enum name="exit" value="4" />
-            <enum name="edit" value="5" />
-            <enum name="done" value="6" />
-            <enum name="search" value="7" />
+            <enum name="back_arrow_and_download" value="3" />
         </attr>
         <attr name="toolbar_color_scheme" format="enum">
             <enum name="transparent" value="0" />

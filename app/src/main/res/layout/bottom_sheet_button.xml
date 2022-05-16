@@ -1,0 +1,76 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/Theme.Pokedex.MainComponents"
+    android:background="@drawable/background_bottom_sheet">
+
+    <ImageView
+        android:id="@+id/bottomSheetButtonCloseImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/indent_16"
+        android:layout_marginEnd="@dimen/indent_16"
+        android:padding="@dimen/indent_4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_close"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/bottomSheetButtonLabelImageView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/bottomSheetButtonTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/indent_48"
+        android:layout_marginTop="@dimen/indent_48"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.Bold.18"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bottomSheetButtonLabelImageView"
+        app:layout_goneMarginBottom="@dimen/indent_24"
+        tools:text="Войдите или зарегистрируйтесь, чтобы открыть этот раздел" />
+
+    <TextView
+        android:id="@+id/bottomSheetButtonMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/indent_48"
+        android:layout_marginTop="@dimen/indent_16"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.Regular.16"
+        app:layout_constraintBottom_toTopOf="@id/bottomSheetButtonPositiveButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bottomSheetButtonTitle"
+        app:layout_goneMarginBottom="@dimen/indent_24"
+        tools:text="Для просмотра полного каталога, необходимо быть зарегистрированным пользователем" />
+
+    <Button
+        android:id="@+id/bottomSheetButtonPositiveButton"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginBottom="@dimen/indent_16"
+        android:layout_marginTop="@dimen/indent_16"
+        android:layout_marginHorizontal="@dimen/indent_48"
+        android:backgroundTint="@color/type_dark"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.Medium.16"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bottomSheetButtonMessage"
+        tools:text="Button"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

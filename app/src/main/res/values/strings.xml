@@ -2,10 +2,12 @@
     <string name="app_name">Pokedex</string>
     <string name="pokemon_number_format">#%d</string>
 
-    <!-- Error messages -->
+    <!-- Error and toast messages -->
     <string name="error_message_getting_data_from_server">Something went wrong. Server is not available.</string>
     <string name="error_message_getting_data_from_db">Something went wrong. Please, try to clean db cache.</string>
     <string name="error_message_write_data_to_database">Something went wrong. Please, try to clean db cache.</string>
+    <string name="error_message_fail_to_load_image">Fail to load image!</string>
+    <string name="toast_message_file_loaded_successfully">Image is loaded %s!</string>
 
     <!-- Pokemon info tabs -->
     <string name="tab_about">About</string>
@@ -41,4 +43,10 @@
     <string name="remove_collection">Remove from my collection</string>
     <string name="read_article">Read article about pathology</string>
     <string name="leave_feedback">Leave feedback on 3D model</string>
+
+    <!-- Permissions textx -->
+    <string name="external_storage_permission_title">Allow access to the internal memory of the device.</string>
+    <string name="external_storage_permission_message">To load image you need to permit external storage access!</string>
+    <string name="rationale_permission_button">Allow</string>
+    <string name="dont_ask_again_permission_button">Settings</string>
 </resources>
