@@ -22,7 +22,8 @@ import com.pahomovichk.pokedex.core.utils.extensions.visible
  * Use toolbar_type to define the type of toolbar
  *      1) simple - toolbar without any icons or text
  *      2) back_arrow - toolbar with navigation back-icon
- *      3) back_arrow_and_more - back-arrow toolbar with
+ *      3) back_arrow_and_more - back-arrow toolbar with menu
+ *      3) back_arrow_and_download - back-arrow toolbar with download-icon
  */
 class WidgetToolbar(context: Context, attrs: AttributeSet?) :
     MaterialToolbar(context, attrs) {
