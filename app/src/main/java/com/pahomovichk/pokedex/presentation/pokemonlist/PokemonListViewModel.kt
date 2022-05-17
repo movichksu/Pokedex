@@ -54,7 +54,7 @@ class PokemonListViewModel @Inject constructor(
         viewModelScope.launch {
             dbInteractor.getPokemosList()
                 .map { pokemons ->
-                    pokemons.mapIndexed { index, entry ->
+                    pokemons.mapIndexed { _, entry ->
                         PokemonItem(
                             entry.id,
                             entry.name,

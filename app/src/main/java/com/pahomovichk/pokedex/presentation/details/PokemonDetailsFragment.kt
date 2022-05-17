@@ -26,6 +26,9 @@ import com.pahomovichk.pokedex.data.network.dto.TypeX
 import com.pahomovichk.pokedex.databinding.FragmentPokemonDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import com.github.mikephil.charting.formatter.ValueFormatter
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 @AndroidEntryPoint
 class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details),
@@ -35,7 +38,8 @@ class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details),
 
     private val viewModel by viewModels<PokemonDetailsViewModel>()
 
-    private val pokemon by lazy { tryToGetSerializable<PokemonEntity>(POKEMON_KEY) }
+    private val pokemon : PokemonEntity
+        by lazy {  Json.decodeFromString(tryToGetString(POKEMON_KEY)) }
 
     private val barChartList = arrayListOf<BarEntry>()
 
@@ -101,7 +105,7 @@ class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details),
             }
 
             R.id.openPokemonModel -> {
-                //
+                viewModel.onOpenModelClicked(pokemon)
                 true
             }
             else -> false
@@ -264,8 +268,9 @@ class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details),
         private const val CHART_BAR_TEXT_SIZE = 14F
 
         fun newInstance(pokemon: PokemonEntity) = PokemonDetailsFragment().apply {
+            val serializedPokemon = Json.encodeToString(pokemon)
             arguments = bundleOf(
-                POKEMON_KEY to pokemon
+                POKEMON_KEY to serializedPokemon
             )
         }
     }
