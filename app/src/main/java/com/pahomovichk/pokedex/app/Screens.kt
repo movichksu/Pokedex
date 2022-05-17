@@ -2,11 +2,18 @@ package com.pahomovichk.pokedex.app
 
 import com.pahomovichk.pokedex.data.database.model.PokemonEntity
 import com.pahomovichk.pokedex.presentation.details.PokemonDetailsFragment
+import com.pahomovichk.pokedex.presentation.mainflow.MainFlowFragment
 import com.pahomovichk.pokedex.presentation.pokemonlist.PokemonListFragment
 import com.pahomovichk.pokedex.presentation.showmodel.PokemonModelFragment
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 
 object Screens {
+
+
+    object MainFlow : SupportAppScreen() {
+
+        override fun getFragment() = MainFlowFragment()
+    }
 
     object PokemonList : SupportAppScreen() {
 

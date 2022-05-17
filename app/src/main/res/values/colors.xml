@@ -13,6 +13,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00FFFFFF</color>
 
+    <color name="old_silver">#83848A</color>
+    <color name="charcoal">#262B2F</color>
     <color name="light_grey">#FFFFFFFF</color>
     <color name="dark">#FF101010</color>
     <color name="blue_snow">#0D95E5</color>
@@ -23,7 +25,7 @@
     <!-- POKEMON TYPES COLORS -->
     <color name="type_bug">#5cb245</color>
     <color name="type_ground">#c5a352</color>
-    <color name="type_fire">#eb4a22</color>
+    <color name="type_fire">#EB5757</color>
     <color name="type_water">#3f93df</color>
     <color name="type_electric">#f2cb6c</color>
     <color name="type_dark">#646464</color>

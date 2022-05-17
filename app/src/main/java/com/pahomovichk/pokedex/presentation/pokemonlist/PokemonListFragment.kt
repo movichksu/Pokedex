@@ -24,16 +24,15 @@ class PokemonListFragment: BaseFragment(R.layout.fragment_pokemon_list) {
         viewModel.onFirstLaunch()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
     override fun initUI() {
         with(binding) {
             pokemonItemAdapter = PokemonItemAdapter { id ->
                 viewModel.onPokemonItemClicked(id)
             }
             pokemonRecycler.adapter = pokemonItemAdapter
+            swipeRefresh.setOnRefreshListener {
+                swipeRefresh.isRefreshing = false
+            }
         }
     }
 

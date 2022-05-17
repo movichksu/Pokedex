@@ -49,4 +49,7 @@
     <string name="external_storage_permission_message">To load image you need to permit external storage access!</string>
     <string name="rationale_permission_button">Allow</string>
     <string name="dont_ask_again_permission_button">Settings</string>
+    <string name="bottom_tab_catalog">Catalog</string>
+    <string name="bottom_tab_search">Search</string>
+    <string name="bottom_tab_collection">Collection</string>
 </resources>
