@@ -7,9 +7,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pahomovichk.pokedex.R
+import com.pahomovichk.pokedex.app.Screens
 import com.pahomovichk.pokedex.core.utils.net.result.ResultResource
 import com.pahomovichk.pokedex.core.utils.extensions.finally
 import com.pahomovichk.pokedex.core.utils.extensions.onFailure
+import com.pahomovichk.pokedex.data.database.model.PokemonEntity
 import com.pahomovichk.pokedex.data.network.dto.Pokemon
 import com.pahomovichk.pokedex.domain.interactor.PokemonNetworkInteractor
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,6 +31,10 @@ class PokemonDetailsViewModel@Inject constructor(
 
     fun onTabSelected(@PokemonInfoTabIndex selectedTabIndex: Int) {
         currentTabIndex = selectedTabIndex
+    }
+
+    fun onOpenModelClicked(pokemon: PokemonEntity) {
+        router.navigateTo(Screens.PokemonModel(pokemon))
     }
 
     fun onBackPressed() {

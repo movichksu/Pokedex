@@ -6,8 +6,9 @@ import androidx.room.PrimaryKey
 import com.pahomovichk.pokedex.core.utils.Constants.POKEMONS_TABLE_NAME
 import com.pahomovichk.pokedex.data.network.dto.AbilityX
 import com.pahomovichk.pokedex.data.network.dto.TypeX
-import java.io.Serializable
+import kotlinx.serialization.Serializable
 
+@Serializable
 @Entity(tableName = POKEMONS_TABLE_NAME)
 data class PokemonEntity (
     @PrimaryKey
@@ -33,4 +34,4 @@ data class PokemonEntity (
     val stats: List<BaseStat>,
     @ColumnInfo(name = "description")
     val description: String
-): Serializable
+)
