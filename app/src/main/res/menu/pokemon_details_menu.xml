@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-<group>
-    <item
-        android:id="@+id/addPokemonToFavourites"
-        android:title="@string/menu_item_add_to_favourites" />
-    <item
-        android:id="@+id/sharePokemon"
-        android:title="@string/menu_item_share" />
-    <item
-        android:id="@+id/openPokemonModel"
-        android:title="@string/menu_item_open_special_model" />
-</group>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:id="@+id/pokemonDetailsMenu">
+        <item
+            android:id="@+id/sharePokemon"
+            android:title="@string/menu_item_share" />
+        <item
+            android:id="@+id/openPokemonModel"
+            android:title="@string/menu_item_open_special_model" />
+    </group>
 </menu>

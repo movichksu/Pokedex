@@ -1,7 +1,5 @@
 package com.pahomovichk.pokedex.presentation.pokemonlist
 
-import android.os.Bundle
-import android.view.View
 import androidx.fragment.app.viewModels
 import com.pahomovichk.pokedex.R
 import com.pahomovichk.pokedex.core.ui.BaseFragment
@@ -11,7 +9,7 @@ import com.pahomovichk.pokedex.presentation.pokemonlist.adapter.PokemonItemAdapt
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PokemonListFragment: BaseFragment(R.layout.fragment_pokemon_list) {
+class PokemonListFragment : BaseFragment(R.layout.fragment_pokemon_list) {
 
     private val binding by viewBinding { FragmentPokemonListBinding.bind(requireView()) }
 
@@ -26,9 +24,10 @@ class PokemonListFragment: BaseFragment(R.layout.fragment_pokemon_list) {
 
     override fun initUI() {
         with(binding) {
-            pokemonItemAdapter = PokemonItemAdapter { id ->
-                viewModel.onPokemonItemClicked(id)
-            }
+            pokemonItemAdapter = PokemonItemAdapter(
+                { id -> viewModel.onPokemonItemClicked(id) },
+                { id, isFavourite -> viewModel.onHeartClicked(id, isFavourite) }
+            )
             pokemonRecycler.adapter = pokemonItemAdapter
             swipeRefresh.setOnRefreshListener {
                 swipeRefresh.isRefreshing = false
