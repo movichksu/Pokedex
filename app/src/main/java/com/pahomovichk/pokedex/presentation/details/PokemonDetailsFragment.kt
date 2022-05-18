@@ -44,6 +44,11 @@ class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details),
 
     private var isPokemonFavourite = false
 
+    override fun onFirstLaunch() {
+        super.onFirstLaunch()
+        viewModel.getEvolutionChain(pokemon.id)
+    }
+
     override fun initUI() {
         with(binding) {
             isPokemonFavourite = pokemon.is_favourite
@@ -83,7 +88,19 @@ class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details),
     override fun initVM() {
         super.initVM()
         with(viewModel) {
-
+            chainMutableLiveData.observe(viewLifecycleOwner) { result ->
+                showProgress(false)
+                result
+                    .onProgress { showProgress(true) }
+                    .onSuccess {
+                        requireContext().toast("GOT EVOLUTIONS ${it.size}")
+                    }
+                    .onFailure {
+                        requireContext().toast(
+                            getString(R.string.error_message_fail_to_get_evolution_chain)
+                        )
+                    }
+            }
         }
     }
 

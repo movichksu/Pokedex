@@ -7,6 +7,7 @@ import com.pahomovichk.pokedex.core.utils.net.result.ResultResource
 import com.pahomovichk.pokedex.data.network.api.PokeApi
 import com.pahomovichk.pokedex.data.network.dto.Pokemon
 import com.pahomovichk.pokedex.data.network.dto.PokemonList
+import com.pahomovichk.pokedex.data.network.dto.EvolutionChain
 import com.pahomovichk.pokedex.domain.interactor.PokemonNetworkInteractor
 import dagger.hilt.android.scopes.ActivityScoped
 import kotlinx.coroutines.launch
@@ -42,6 +43,11 @@ class PokemonNetworkInteractorImpl @Inject constructor(
                 }
                 newList
             }
+        }
+
+    override suspend fun getEvolutionChain(chainId: Int): ResultResource<EvolutionChain> =
+        withContext(dispatchers.io) {
+            pokeApi.getEvolutionChain(chainId)
         }
 
     override suspend fun getPokemonInfo(id: Int): ResultResource<Pokemon> =

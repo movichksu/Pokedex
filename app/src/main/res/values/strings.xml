@@ -4,6 +4,7 @@
 
     <!-- Error and toast messages -->
     <string name="error_message_getting_data_from_server">Something went wrong. Server is not available.</string>
+    <string name="error_message_fail_to_get_evolution_chain">Something went wrong. Fail to get evolutions chain.</string>
     <string name="error_message_getting_data_from_db">Something went wrong. Please, try to clean db cache.</string>
     <string name="error_message_write_data_to_database">Something went wrong. Please, try to clean db cache.</string>
     <string name="error_message_fail_to_load_image">Fail to load image!</string>
