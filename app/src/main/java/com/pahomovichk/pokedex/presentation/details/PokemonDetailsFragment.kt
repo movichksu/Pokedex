@@ -25,6 +25,7 @@ import com.pahomovichk.pokedex.data.network.dto.TypeX
 import com.pahomovichk.pokedex.databinding.FragmentPokemonDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import com.github.mikephil.charting.formatter.ValueFormatter
+import com.pahomovichk.pokedex.presentation.details.adapter.EvolutionsChainAdapter
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -41,6 +42,8 @@ class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details),
             by lazy { Json.decodeFromString(tryToGetString(POKEMON_KEY)) }
 
     private val barChartList = arrayListOf<BarEntry>()
+
+    private lateinit var evolutionsAdapter: EvolutionsChainAdapter
 
     private var isPokemonFavourite = false
 
@@ -92,8 +95,8 @@ class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details),
                 showProgress(false)
                 result
                     .onProgress { showProgress(true) }
-                    .onSuccess {
-                        requireContext().toast("GOT EVOLUTIONS ${it.size}")
+                    .onSuccess { evolutionChain ->
+                        evolutionsAdapter.setItems(evolutionChain)
                     }
                     .onFailure {
                         requireContext().toast(
@@ -238,7 +241,11 @@ class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details),
 
     private fun setEvolutionsTabContent(pokemon: PokemonEntity) {
         with(binding.info.evolutionTabContent) {
-
+            evolutionsAdapter = EvolutionsChainAdapter()
+            evolutionsRecycler.adapter = evolutionsAdapter
+            swipeRefresh.setOnRefreshListener {
+                swipeRefresh.isRefreshing = false
+            }
         }
     }
 

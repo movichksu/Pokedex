@@ -4,12 +4,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pahomovichk.pokedex.app.Screens
+import com.pahomovichk.pokedex.core.utils.extensions.capitalizeFirst
 import com.pahomovichk.pokedex.core.utils.extensions.finally
 import com.pahomovichk.pokedex.core.utils.extensions.map
 import com.pahomovichk.pokedex.core.utils.extensions.onFailure
 import com.pahomovichk.pokedex.core.utils.net.result.ResultResource
 import com.pahomovichk.pokedex.data.database.model.PokemonEntity
 import com.pahomovichk.pokedex.data.model.EvolutionChainItem
+import com.pahomovichk.pokedex.data.network.dto.EvolutionChain
 import com.pahomovichk.pokedex.domain.interactor.PokemonDbInteractor
 import com.pahomovichk.pokedex.domain.interactor.PokemonNetworkInteractor
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -39,47 +41,7 @@ class PokemonDetailsViewModel @Inject constructor(
         viewModelScope.launch {
             networkInteractor.getEvolutionChain(chainId)
                 .map { evolutionChain ->
-                    val evolutionsList = arrayListOf<EvolutionChainItem>()
-                    with(evolutionChain.chain) {
-                        if (evolves_to.isNotEmpty()) {
-                            if (evolves_to.size == 1) {
-                                evolves_to.get(0).let { firstEvolve ->
-                                    evolutionsList.add(
-                                        EvolutionChainItem(
-                                            getId(species.url).toInt(),
-                                            species.name,
-                                            getId(firstEvolve.species.url).toInt(),
-                                            firstEvolve.species.name
-                                        )
-                                    )
-                                    if (firstEvolve.evolves_to.isNotEmpty()) {
-                                        firstEvolve.evolves_to.forEach { evolve ->
-                                            evolutionsList.add(
-                                                EvolutionChainItem(
-                                                    getId(species.url).toInt(),
-                                                    species.name,
-                                                    getId(evolve.species.url).toInt(),
-                                                    evolve.species.name
-                                                )
-                                            )
-                                        }
-                                    }
-                                }
-                            } else {
-                                evolves_to.forEach { evolve ->
-                                    evolutionsList.add(
-                                        EvolutionChainItem(
-                                            getId(species.url).toInt(),
-                                            species.name,
-                                            getId(evolve.species.url).toInt(),
-                                            evolve.species.name
-                                        )
-                                    )
-                                }
-                            }
-                        }
-                    }
-                    evolutionsList
+                    mapChainToChainList(evolutionChain)
                 }
                 .onFailure { Timber.e(it) }
                 .finally { chainMutableLiveData.postValue(it) }
@@ -110,5 +72,49 @@ class PokemonDetailsViewModel @Inject constructor(
         } else {
             url.takeLastWhile { it.isDigit() }
         }
+    }
+
+    private fun mapChainToChainList(evolutionChain: EvolutionChain): ArrayList<EvolutionChainItem> {
+        val evolutionsList = arrayListOf<EvolutionChainItem>()
+        with(evolutionChain.chain) {
+            if (evolves_to.isNotEmpty()) {
+                if (evolves_to.size == 1) {
+                    evolves_to.get(0).let { firstEvolve ->
+                        evolutionsList.add(
+                            EvolutionChainItem(
+                                getId(species.url).toInt(),
+                                species.name.capitalizeFirst(),
+                                getId(firstEvolve.species.url).toInt(),
+                                firstEvolve.species.name.capitalizeFirst()
+                            )
+                        )
+                        if (firstEvolve.evolves_to.isNotEmpty()) {
+                            firstEvolve.evolves_to.forEach { evolve ->
+                                evolutionsList.add(
+                                    EvolutionChainItem(
+                                        getId(firstEvolve.species.url).toInt(),
+                                        firstEvolve.species.name.capitalizeFirst(),
+                                        getId(evolve.species.url).toInt(),
+                                        evolve.species.name.capitalizeFirst()
+                                    )
+                                )
+                            }
+                        }
+                    }
+                } else {
+                    evolves_to.forEach { evolve ->
+                        evolutionsList.add(
+                            EvolutionChainItem(
+                                getId(species.url).toInt(),
+                                species.name.capitalizeFirst(),
+                                getId(evolve.species.url).toInt(),
+                                evolve.species.name.capitalizeFirst()
+                            )
+                        )
+                    }
+                }
+            }
+        }
+        return evolutionsList
     }
 }
