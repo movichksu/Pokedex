@@ -72,6 +72,8 @@ class PokemonListViewModel @Inject constructor(
                                             entry.id,
                                             entry.name,
                                             entry.is_favourite,
+                                            entry.dominant_color,
+                                            entry.types,
                                             getPokemonLargePngImage(entry.id.toString())
                                         )
                                     }

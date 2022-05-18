@@ -26,7 +26,10 @@ class PokemonListFragment : BaseFragment(R.layout.fragment_pokemon_list) {
         with(binding) {
             pokemonItemAdapter = PokemonItemAdapter(
                 { id -> viewModel.onPokemonItemClicked(id) },
-                { id, isFavourite -> viewModel.onHeartClicked(id, isFavourite) }
+                { id, isFavourite ->
+                    pokemonItemAdapter.changeItem(id, isFavourite)
+                    viewModel.onHeartClicked(id, isFavourite)
+                }
             )
             pokemonRecycler.adapter = pokemonItemAdapter
             swipeRefresh.setOnRefreshListener {

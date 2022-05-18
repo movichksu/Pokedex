@@ -46,11 +46,16 @@ class PokemonItemAdapter(
         }
     }
 
-
     @SuppressLint("NotifyDataSetChanged")
     fun setFavouriteItems(newItems: List<PokemonItem>) {
         items.clear()
         items.addAll(newItems)
         notifyDataSetChanged()
+    }
+
+    fun changeItem(id: Int, isFavourite: Boolean) {
+        val index = items.indexOfFirst { it.id == id }
+        items[index] = items[index].copy(isFavourite = isFavourite)
+        notifyItemChanged(index)
     }
 }

@@ -75,4 +75,5 @@ dependencies {
     androidTestImplementation test.values()
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation 'pub.hanks:smallbang:1.2.2'
 }

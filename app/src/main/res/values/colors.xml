@@ -41,4 +41,19 @@
     <color name="type_normal">#a0a0a0</color>
     <color name="type_flying">#88bbd4</color>
     <color name="type_fairy">#ee86b6</color>
+
+    <!-- DOMINANT COLORS -->
+    <color name="dominant_pink">#e29db0</color>
+    <color name="dominant_red">#d7584a</color>
+    <color name="dominant_white">#dee8f1</color>
+    <color name="dominant_black">#646464</color>
+    <color name="dominant_gray">#a0a0a0</color>
+    <color name="dominant_brown">#9b8788</color>
+    <color name="dominant_yellow">#f2cb6c</color>
+    <color name="dominant_purple">#af7eab</color>
+
+<!--    <color name="dominant_blue">#5daaba</color>-->
+    <color name="dominant_blue">#7cb4e9</color>
+<!--    <color name="dominant_purple">#a587aa</color>-->
+    <color name="dominant_green">#a8c752</color>
 </resources>
