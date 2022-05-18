@@ -3,9 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/pokemonCardContainer"
-    android:layout_width="150dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="8dp"
     android:layout_marginVertical="8dp"
     app:cardCornerRadius="16dp"
     app:cardElevation="4dp"
@@ -16,27 +15,27 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/pokemonNameText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/indent_12"
-            android:layout_marginTop="@dimen/indent_16"
-            android:textAppearance="@style/TextAppearance.Bold.18.LightGray"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Bulbasaur" />
-
-        <TextView
             android:id="@+id/pokemonIdText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/indent_12"
-            android:layout_marginEnd="@dimen/indent_12"
+            android:layout_marginStart="@dimen/indent_12"
             android:alpha="0.7"
-            android:textAppearance="@style/TextAppearance.Bold.16.LightGray"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textAppearance="@style/TextAppearance.Bold.18.LightGray"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="#001" />
+
+        <TextView
+            android:id="@+id/pokemonNameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/indent_12"
+            android:layout_marginTop="@dimen/indent_12"
+            android:textAppearance="@style/TextAppearance.Bold.20.LightGray"
+            app:layout_constraintStart_toEndOf="@id/pokemonIdText"
+            app:layout_constraintBottom_toBottomOf="@id/pokemonIdText"
+            tools:text="Bulbasaur" />
 
         <TextView
             android:id="@+id/pokemonTypeFirstText"
@@ -57,15 +56,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/indent_8"
-            android:layout_marginStart="@dimen/indent_12"
+            android:layout_marginStart="@dimen/indent_8"
             android:background="@drawable/background_rounded_border"
             android:gravity="center"
             android:paddingHorizontal="@dimen/indent_12"
             android:textAppearance="@style/TextAppearance.Regular.14.LightGray"
             android:visibility="gone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/pokemonTypeFirstText"
+            app:layout_constraintStart_toEndOf="@id/pokemonTypeFirstText"
+            app:layout_constraintTop_toBottomOf="@id/pokemonNameText"
             tools:text="Plant" />
+
+        <xyz.hanks.library.bang.SmallBangView
+            android:id="@+id/heartIcon"
+            android:layout_width="@dimen/indent_64"
+            android:layout_height="@dimen/indent_64"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="@dimen/indent_32"
+                android:layout_height="@dimen/indent_32"
+                android:layout_gravity="center"
+                android:src="@drawable/selector_heart" />
+        </xyz.hanks.library.bang.SmallBangView>
 
         <ImageView
             android:id="@+id/pokemonImage"
@@ -74,7 +88,7 @@
             android:layout_margin="@dimen/indent_4"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/pokemonIdText"
+            app:layout_constraintTop_toTopOf="parent"
             tools:src="@mipmap/ic_launcher" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

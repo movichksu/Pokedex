@@ -1,7 +1,6 @@
 package com.pahomovichk.pokedex.presentation.details
 
 import android.graphics.Color
-import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import android.view.*
@@ -38,17 +37,16 @@ class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details),
 
     private val viewModel by viewModels<PokemonDetailsViewModel>()
 
-    private val pokemon : PokemonEntity
-        by lazy {  Json.decodeFromString(tryToGetString(POKEMON_KEY)) }
+    private val pokemon: PokemonEntity
+            by lazy { Json.decodeFromString(tryToGetString(POKEMON_KEY)) }
 
     private val barChartList = arrayListOf<BarEntry>()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
+    private var isPokemonFavourite = false
 
     override fun initUI() {
         with(binding) {
+            isPokemonFavourite = pokemon.is_favourite
             root.setBackgroundColor(getColor(pokemon.dominant_color.parseToColor()))
             toolbar.setNavigationOnClickListener { onBackPressed() }
             toolbar.setOnEndIconClickListener {
@@ -95,15 +93,20 @@ class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details),
 
     override fun onMenuItemClick(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.addPokemonToFavourites -> {
-                //
+            FAVOURITE_MENU_TAB_ID -> {
+                if (item.title == getString(R.string.menu_item_remove_from_favourites)) {
+                    isPokemonFavourite = false
+                    viewModel.onHeartClicked(pokemon.id, isPokemonFavourite)
+                } else {
+                    isPokemonFavourite = true
+                    viewModel.onHeartClicked(pokemon.id, isPokemonFavourite)
+                }
                 true
             }
             R.id.sharePokemon -> {
                 //
                 true
             }
-
             R.id.openPokemonModel -> {
                 viewModel.onOpenModelClicked(pokemon)
                 true
@@ -116,8 +119,13 @@ class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details),
         PopupMenu(requireContext(), binding.toolbar.getEndIconView()).apply {
             setOnMenuItemClickListener(this@PokemonDetailsFragment)
             inflate(R.menu.pokemon_details_menu)
-            show()
-        }
+            val text = if (isPokemonFavourite) {
+                R.string.menu_item_remove_from_favourites
+            } else {
+                R.string.menu_item_add_to_favourites
+            }
+            menu.add(R.id.pokemonDetailsMenu, FAVOURITE_MENU_TAB_ID, 0, text)
+        }.show()
     }
 
     private fun setAboutTabContent(pokemon: PokemonEntity) {
@@ -261,6 +269,7 @@ class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details),
     companion object {
 
         private const val POKEMON_KEY = "POKEMON_KEY"
+        private const val FAVOURITE_MENU_TAB_ID = 101
         private val CHART_BAR_SHADOW_COLOR = Color.argb(40, 150, 150, 150)
         private const val CHART_BAR_ANIMATION_DURATION = 2000
         private const val CHART_BAR_GRANULARITY = 10F

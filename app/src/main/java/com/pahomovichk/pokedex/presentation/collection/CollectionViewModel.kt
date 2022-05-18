@@ -1,4 +1,4 @@
-package com.pahomovichk.pokedex.presentation.pokemonlist
+package com.pahomovichk.pokedex.presentation.collection
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -6,8 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.pahomovichk.pokedex.app.Screens
 import com.pahomovichk.pokedex.core.ui.SingleLiveEvent
 import com.pahomovichk.pokedex.core.utils.extensions.*
-import com.pahomovichk.pokedex.core.utils.net.result.ResultResource
 import com.pahomovichk.pokedex.core.utils.getPokemonLargePngImage
+import com.pahomovichk.pokedex.core.utils.net.result.ResultResource
 import com.pahomovichk.pokedex.data.database.model.PokemonEntity
 import com.pahomovichk.pokedex.data.model.PokemonItem
 import com.pahomovichk.pokedex.domain.interactor.PokemonDbInteractor
@@ -19,10 +19,10 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class PokemonListViewModel @Inject constructor(
+class CollectionViewModel @Inject constructor(
     private val router: Router,
-    private val dbInteractor: PokemonDbInteractor
-): ViewModel() {
+    private val interactor: PokemonDbInteractor
+) : ViewModel() {
 
     val pokemonListLiveData = MutableLiveData<ResultResource<List<PokemonItem>>>()
     val getPokemonEntityLiveEvent = SingleLiveEvent<ResultResource<PokemonEntity>>()
@@ -31,42 +31,39 @@ class PokemonListViewModel @Inject constructor(
         getPokemonList()
     }
 
-    fun onPokemonItemClicked(id: Int) {
-        getPokemonEntityLiveEvent.value = ResultResource.InProgress
-        viewModelScope.launch {
-            dbInteractor.getPokemon(id)
-                .onFailure { Timber.e(it) }
-                .finally { getPokemonEntityLiveEvent.postValue(it) }
-        }
+    fun onGotPokemonEntity(pokemonEntity: PokemonEntity) {
+        router.navigateTo(Screens.PokemonDetails(pokemonEntity))
     }
 
     fun onHeartClicked(id: Int, isFavourite: Boolean) {
         viewModelScope.launch {
             if (isFavourite) {
-                dbInteractor.addToFavourites(id)
+                interactor.addToFavourites(id)
             } else {
-                dbInteractor.removeFromFavourites(id)
+                interactor.removeFromFavourites(id)
             }
         }
     }
 
-    fun onGotPokemonEntity(pokemonEntity: PokemonEntity) {
-        router.navigateTo(Screens.PokemonDetails(pokemonEntity))
-    }
-
-    fun onBackPressed() {
-        router.exit()
+    fun onPokemonItemClicked(id: Int) {
+        getPokemonEntityLiveEvent.value = ResultResource.InProgress
+        viewModelScope.launch {
+            interactor.getPokemon(id)
+                .onFailure { Timber.e(it) }
+                .finally { getPokemonEntityLiveEvent.postValue(it) }
+        }
     }
 
     private fun getPokemonList() {
         pokemonListLiveData.value = ResultResource.InProgress
         viewModelScope.launch {
-            dbInteractor.getPokemons()
+            interactor.getPokemons()
                 .onSuccess { result ->
                     result.collect { pokemonsList ->
                         pokemonListLiveData.postValue(
                             ResultResource.Success.Value(
                                 pokemonsList
+                                    .filter { it.is_favourite }
                                     .map { entry ->
                                         PokemonItem(
                                             entry.id,
@@ -87,4 +84,5 @@ class PokemonListViewModel @Inject constructor(
                 }
         }
     }
+
 }

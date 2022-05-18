@@ -8,6 +8,8 @@ import com.pahomovichk.pokedex.data.database.model.PokemonEntity
 import com.pahomovichk.pokedex.data.network.dto.Pokemon
 import com.pahomovichk.pokedex.domain.interactor.PokemonDbInteractor
 import dagger.hilt.android.scopes.ActivityScoped
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.withContext
 import java.lang.Exception
 import javax.inject.Inject
@@ -16,7 +18,7 @@ import javax.inject.Inject
 class PokemonDbInteractorImpl @Inject constructor(
     private val dao: PokemonsDao,
     private val dispatchers: DispatcherProvider
-): PokemonDbInteractor {
+) : PokemonDbInteractor {
 
     override suspend fun writePokemonsDao(list: List<Pokemon>): ResultResource<Boolean> =
         withContext(dispatchers.io) {
@@ -42,6 +44,15 @@ class PokemonDbInteractorImpl @Inject constructor(
             return@withContext ResultResource.Success.Value(pokemons)
         }
 
+    override suspend fun getPokemons(): ResultResource<Flow<List<PokemonEntity>>> =
+        withContext(dispatchers.io) {
+            try {
+                return@withContext ResultResource.Success.Value(dao.getPokemons())
+            } catch (e: Exception) {
+                return@withContext ResultResource.Failure.Error(e)
+            }
+        }
+
     override suspend fun getPokemon(id: Int): ResultResource<PokemonEntity> =
         withContext(dispatchers.io) {
             try {
@@ -50,5 +61,15 @@ class PokemonDbInteractorImpl @Inject constructor(
             } catch (e: Exception) {
                 return@withContext ResultResource.Failure.Error(e)
             }
+        }
+
+    override suspend fun addToFavourites(id: Int) =
+        withContext(dispatchers.io) {
+            dao.setPathologyFavouriteTrue(id)
+        }
+
+    override suspend fun removeFromFavourites(id: Int) =
+        withContext(dispatchers.io) {
+            dao.setPathologyFavouriteFalse(id)
         }
 }

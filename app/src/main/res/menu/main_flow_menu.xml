@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/item_catalog"
+        android:icon="@drawable/ic_catalog"
+        android:title="@string/bottom_tab_catalog" />
+
+    <item
+        android:id="@+id/item_search"
+        android:icon="@drawable/ic_global_search"
+        android:title="@string/bottom_tab_search" />
+
+    <item
+        android:id="@+id/item_collection"
+        android:icon="@drawable/ic_star"
+        android:title="@string/bottom_tab_collection" />
+</menu>

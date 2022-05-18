@@ -1,19 +1,19 @@
-package com.pahomovichk.pokedex.presentation.pokemonlist
+package com.pahomovichk.pokedex.presentation.collection
 
 import androidx.fragment.app.viewModels
 import com.pahomovichk.pokedex.R
 import com.pahomovichk.pokedex.core.ui.BaseFragment
 import com.pahomovichk.pokedex.core.utils.extensions.*
-import com.pahomovichk.pokedex.databinding.FragmentPokemonListBinding
+import com.pahomovichk.pokedex.databinding.FragmentCollectionBinding
 import com.pahomovichk.pokedex.presentation.pokemonlist.adapter.PokemonItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PokemonListFragment : BaseFragment(R.layout.fragment_pokemon_list) {
+class CollectionFragment : BaseFragment(R.layout.fragment_collection) {
 
-    private val binding by viewBinding { FragmentPokemonListBinding.bind(requireView()) }
+    private val binding by viewBinding { FragmentCollectionBinding.bind(requireView()) }
 
-    private val viewModel by viewModels<PokemonListViewModel>()
+    private val viewModel by viewModels<CollectionViewModel>()
 
     private lateinit var pokemonItemAdapter: PokemonItemAdapter
 
@@ -26,10 +26,7 @@ class PokemonListFragment : BaseFragment(R.layout.fragment_pokemon_list) {
         with(binding) {
             pokemonItemAdapter = PokemonItemAdapter(
                 { id -> viewModel.onPokemonItemClicked(id) },
-                { id, isFavourite ->
-                    pokemonItemAdapter.changeItem(id, isFavourite)
-                    viewModel.onHeartClicked(id, isFavourite)
-                }
+                { id, isFavourite -> viewModel.onHeartClicked(id, isFavourite) }
             )
             pokemonRecycler.adapter = pokemonItemAdapter
             swipeRefresh.setOnRefreshListener {
@@ -46,7 +43,7 @@ class PokemonListFragment : BaseFragment(R.layout.fragment_pokemon_list) {
                 result
                     .onProgress { showProgress(true) }
                     .onSuccess { list ->
-                        pokemonItemAdapter.setItems(list)
+                        pokemonItemAdapter.setFavouriteItems(list)
                     }
                     .onFailure {
                         requireContext().toast(
@@ -69,6 +66,6 @@ class PokemonListFragment : BaseFragment(R.layout.fragment_pokemon_list) {
     }
 
     override fun onBackPressed() {
-        viewModel.onBackPressed()
+        //
     }
 }

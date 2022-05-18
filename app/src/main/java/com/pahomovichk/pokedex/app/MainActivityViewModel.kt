@@ -47,6 +47,6 @@ class MainActivityViewModel @Inject constructor(
     }
 
     fun onDatabaseUpdatedSuccessfully() {
-        router.newRootScreen(Screens.PokemonList)
+        router.newRootScreen(Screens.MainFlow)
     }
 }

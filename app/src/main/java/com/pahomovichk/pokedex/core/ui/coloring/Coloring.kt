@@ -28,15 +28,15 @@ fun String.typeToColor(): Int =
 
 fun DominantColor.parseToColor(): Int =
     when(this) {
-        DominantColor.BLACK -> R.color.type_dark
-        DominantColor.BLUE -> R.color.type_water
-        DominantColor.BROWN -> R.color.type_rock
-        DominantColor.GRAY -> R.color.type_normal
-        DominantColor.GREEN -> R.color.type_grass
-        DominantColor.PINK -> R.color.type_psychic
-        DominantColor.PURPLE -> R.color.type_ghost
-        DominantColor.RED -> R.color.type_fire
-        DominantColor.WHITE -> R.color.type_steal
-        DominantColor.YELLOW -> R.color.type_electric
-        else -> R.color.type_normal
+        DominantColor.BLACK -> R.color.dominant_black
+        DominantColor.BLUE -> R.color.dominant_blue
+        DominantColor.BROWN -> R.color.dominant_brown
+        DominantColor.GRAY -> R.color.dominant_gray
+        DominantColor.GREEN -> R.color.dominant_green
+        DominantColor.PINK -> R.color.dominant_pink
+        DominantColor.PURPLE -> R.color.dominant_purple
+        DominantColor.RED -> R.color.dominant_red
+        DominantColor.WHITE -> R.color.dominant_white
+        DominantColor.YELLOW -> R.color.dominant_yellow
+        else -> R.color.dominant_gray
     }

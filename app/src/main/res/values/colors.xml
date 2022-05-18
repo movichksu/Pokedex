@@ -13,6 +13,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00FFFFFF</color>
 
+    <color name="old_silver">#83848A</color>
+    <color name="charcoal">#262B2F</color>
     <color name="light_grey">#FFFFFFFF</color>
     <color name="dark">#FF101010</color>
     <color name="blue_snow">#0D95E5</color>
@@ -23,7 +25,7 @@
     <!-- POKEMON TYPES COLORS -->
     <color name="type_bug">#5cb245</color>
     <color name="type_ground">#c5a352</color>
-    <color name="type_fire">#eb4a22</color>
+    <color name="type_fire">#EB5757</color>
     <color name="type_water">#3f93df</color>
     <color name="type_electric">#f2cb6c</color>
     <color name="type_dark">#646464</color>
@@ -39,4 +41,19 @@
     <color name="type_normal">#a0a0a0</color>
     <color name="type_flying">#88bbd4</color>
     <color name="type_fairy">#ee86b6</color>
+
+    <!-- DOMINANT COLORS -->
+    <color name="dominant_pink">#e29db0</color>
+    <color name="dominant_red">#d7584a</color>
+    <color name="dominant_white">#dee8f1</color>
+    <color name="dominant_black">#646464</color>
+    <color name="dominant_gray">#a0a0a0</color>
+    <color name="dominant_brown">#9b8788</color>
+    <color name="dominant_yellow">#f2cb6c</color>
+    <color name="dominant_purple">#af7eab</color>
+
+<!--    <color name="dominant_blue">#5daaba</color>-->
+    <color name="dominant_blue">#7cb4e9</color>
+<!--    <color name="dominant_purple">#a587aa</color>-->
+    <color name="dominant_green">#a8c752</color>
 </resources>
