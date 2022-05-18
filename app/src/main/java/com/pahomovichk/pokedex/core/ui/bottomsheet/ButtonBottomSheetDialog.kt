@@ -28,7 +28,6 @@ open class ButtonBottomSheetDialog : BaseBottomSheetDialog() {
         with(binding) {
             with(dialogModel) {
 
-                println("POKEMON DIALOG ${dialogModel.message}")
                 iconId?.let {
                     bottomSheetButtonLabelImageView.setImageResource(it)
                     bottomSheetButtonLabelImageView.visible()

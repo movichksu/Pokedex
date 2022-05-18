@@ -15,10 +15,10 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
     private val viewModel by viewModels<SearchViewModel>()
 
     override fun initUI() {
-        // TODO("Not yet implemented")
+        // TODO
     }
 
     override fun onBackPressed() {
-        // TODO("Not yet implemented")
+        // TODO
     }
 }

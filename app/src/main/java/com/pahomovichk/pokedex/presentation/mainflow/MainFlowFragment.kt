@@ -6,6 +6,8 @@ import androidx.fragment.app.viewModels
 import com.pahomovichk.pokedex.R
 import com.pahomovichk.pokedex.core.ui.BaseFragment
 import com.pahomovichk.pokedex.core.ui.FlowFragment
+import com.pahomovichk.pokedex.core.utils.extensions.goneUnless
+import com.pahomovichk.pokedex.core.utils.extensions.keyboardStateListener
 import com.pahomovichk.pokedex.core.utils.extensions.viewBinding
 import com.pahomovichk.pokedex.databinding.FragmentMainFlowBinding
 import com.pahomovichk.pokedex.presentation.collection.CollectionFragment
@@ -48,12 +50,14 @@ class MainFlowFragment : FlowFragment(R.layout.fragment_main_flow) {
                 true
             }
             initBottomTabFragments()
-            // TODO implement keyboardStateListener to hide bottomBar when needed
+            root.keyboardStateListener(viewLifecycleOwner) { isKeyboardVisible ->
+                mainFlowBottomNavigation.goneUnless(!isKeyboardVisible)
+            }
         }
     }
 
     private fun initBottomTabFragments() {
-        // No need to recreate fragments when app died because its saved by the system
+
         if (childFragmentManager.fragments.isEmpty()) {
             val catalogFragment = PokemonListFragment()
             val searchFragment = SearchFragment()
@@ -101,19 +105,5 @@ class MainFlowFragment : FlowFragment(R.layout.fragment_main_flow) {
                 }
             }
         }
-    }
-
-    private fun changeBottomTab(tag: String) {
-        binding.mainFlowBottomNavigation.selectedItemId = when (tag) {
-            CATALOG_TAB_TAG -> R.id.item_catalog
-            SEARCH_TAB_TAG -> R.id.item_search
-            COLLECTION_TAB_TAG -> R.id.item_collection
-            else -> throw IllegalArgumentException()
-        }
-    }
-
-    companion object {
-
-        private const val IS_DATA_LOADED = "IS_DATA_LOADED"
     }
 }
