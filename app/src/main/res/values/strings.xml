@@ -4,6 +4,7 @@
 
     <!-- Error and toast messages -->
     <string name="error_message_getting_data_from_server">Something went wrong. Server is not available.</string>
+    <string name="error_message_fail_to_get_evolution_chain">Something went wrong. Fail to get evolutions chain.</string>
     <string name="error_message_getting_data_from_db">Something went wrong. Please, try to clean db cache.</string>
     <string name="error_message_write_data_to_database">Something went wrong. Please, try to clean db cache.</string>
     <string name="error_message_fail_to_load_image">Fail to load image!</string>
@@ -49,4 +50,10 @@
     <string name="bottom_tab_catalog">Catalog</string>
     <string name="bottom_tab_search">Search</string>
     <string name="bottom_tab_collection">Collection</string>
+    <string name="title_pokemon_catalog">Pokemon Catalog</string>
+    <string name="title_global_search">Global Search</string>
+    <string name="title_my_collection">My Collection</string>
+    <string name="search_textview_default_message">Enter the Pokémon name in the search bar to get started.</string>
+    <string name="search_textview_error_message">No Pokémons found. Check the spellings and try again.</string>
+    <string name="this_pokemon_does_not_evolute">This pokemon does not evolute</string>
 </resources>

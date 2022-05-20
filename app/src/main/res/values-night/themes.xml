@@ -13,4 +13,8 @@
     <style name="Theme.Pokedex.MainComponents">
         <item name="android:backgroundTint">?attr/colorPrimary</item>
     </style>
+
+    <style name="Theme.Pokedex.BottomNavigation">
+        <item name="android:background">@drawable/background_bottom_navigation_dark</item>
+    </style>
 </resources>

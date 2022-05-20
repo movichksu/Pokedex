@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:scrollbars="none"
+    android:paddingBottom="@dimen/indent_12"
     android:layout_marginHorizontal="@dimen/indent_24"
     android:layout_marginTop="@dimen/indent_16">
 
-    <TextView
-        android:id="@+id/aboutText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="aledkjfh ;skdlnvbfj lksednfjr lakejnfrg alkefnjgr alekjfgnrjkfnkarjbfdjvbh,ab
-        kjewnfarjkebnj skjvnjesrbvk jksnjnrjsk jlnjfknjergnjsrnegjrksgv.rj kjnrfksjrenvj kjnsrjvnjrkvb
-        .zksjrnfkjenrgjk. kjsngjkrebgjk jksnr sjkdnrgjr" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dp">
 
     <TextView
         android:id="@+id/speciesText"
@@ -26,7 +21,7 @@
         android:text="@string/about_species"
         android:textAppearance="@style/TextAppearance.Regular.14"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/aboutText" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/heightText"
@@ -72,7 +67,7 @@
         android:layout_marginTop="@dimen/indent_16"
         android:textAppearance="@style/TextAppearance.Regular.14"
         app:layout_constraintStart_toStartOf="@id/guideline"
-        app:layout_constraintTop_toBottomOf="@id/aboutText"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="Seed" />
 
     <TextView
@@ -104,4 +99,19 @@
         app:layout_constraintStart_toStartOf="@id/guideline"
         app:layout_constraintTop_toBottomOf="@id/weightValue"
         tools:text="Abilities" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/aboutText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/indent_16"
+        android:layout_marginTop="@dimen/indent_12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/abilitiesText"
+        tools:text="aledkjfh ;skdlnvbfj lksednfjr lakejnfrg alkefnjgr alekjfgnrjkfnkarjbfdjvbh,ab
+        kjewnfarjkebnj skjvnjesrbvk jksnjnrjsk jlnjfknjergnjsrnegjrksgv.rj kjnrfksjrenvj kjnsrjvnjrkvb
+        .zksjrnfkjenrgjk. kjsngjkrebgjk jksnr sjkdnrgjr" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

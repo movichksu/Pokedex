@@ -10,6 +10,7 @@ data class Pokemon(
     val types: List<Type>,
     val height: Int,
     val weight: Int,
+    val evolution_chain_id: Int,
     val capture_rate: Int? = null,
     val abilities: List<Ability>,
     val stats: List<Stat>,
@@ -17,5 +18,7 @@ data class Pokemon(
     val is_default: Boolean,
     val order: Int,
     val sprites: Sprites,
-    val color: String? = null
+    val color: String? = null,
+    val genera: Genera,
+    val description: List<FlavorTextEntry>
 )

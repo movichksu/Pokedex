@@ -25,6 +25,8 @@ import com.pahomovichk.pokedex.data.network.dto.TypeX
 import com.pahomovichk.pokedex.databinding.FragmentPokemonDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import com.github.mikephil.charting.formatter.ValueFormatter
+import com.pahomovichk.pokedex.presentation.details.adapter.EvolutionsChainAdapter
+import kotlinx.android.synthetic.main.fragment_pokemon_details_evolution.*
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -42,7 +44,14 @@ class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details),
 
     private val barChartList = arrayListOf<BarEntry>()
 
+    private lateinit var evolutionsAdapter: EvolutionsChainAdapter
+
     private var isPokemonFavourite = false
+
+    override fun onFirstLaunch() {
+        super.onFirstLaunch()
+        viewModel.getEvolutionChain(pokemon.evolution_chain_id)
+    }
 
     override fun initUI() {
         with(binding) {
@@ -83,7 +92,26 @@ class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details),
     override fun initVM() {
         super.initVM()
         with(viewModel) {
-
+            chainMutableLiveData.observe(viewLifecycleOwner) { result ->
+                showProgress(false)
+                result
+                    .onProgress { showProgress(true) }
+                    .onSuccess { evolutionChain ->
+                        evolutionsAdapter.setItems(evolutionChain)
+                        if (evolutionChain.isNotEmpty()) {
+                            evolutionsRecycler.visible()
+                            doesNotEvoluteText.gone()
+                        } else {
+                            evolutionsRecycler.gone()
+                            doesNotEvoluteText.visible()
+                        }
+                    }
+                    .onFailure {
+                        requireContext().toast(
+                            getString(R.string.error_message_fail_to_get_evolution_chain)
+                        )
+                    }
+            }
         }
     }
 
@@ -130,6 +158,8 @@ class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details),
 
     private fun setAboutTabContent(pokemon: PokemonEntity) {
         with(binding.info.aboutTabContent) {
+            aboutText.text = pokemon.description
+            speciesValue.text = pokemon.genera
             heightValue.text = getString(R.string.about_height_value, pokemon.height)
             weightValue.text = getString(R.string.about_weight_value, pokemon.weight)
             var abilities = EMPTY_STRING
@@ -191,6 +221,7 @@ class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details),
                 setDrawAxisLine(false)
                 setDrawAxisLine(true)
                 setFitBars(true)
+                textColor = getColor(R.color.old_silver)
                 textSize = CHART_BAR_TEXT_SIZE
                 textAlignment = View.TEXT_ALIGNMENT_TEXT_START
                 position = XAxis.XAxisPosition.BOTTOM
@@ -221,7 +252,11 @@ class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details),
 
     private fun setEvolutionsTabContent(pokemon: PokemonEntity) {
         with(binding.info.evolutionTabContent) {
-
+            evolutionsAdapter = EvolutionsChainAdapter()
+            evolutionsRecycler.adapter = evolutionsAdapter
+            swipeRefresh.setOnRefreshListener {
+                swipeRefresh.isRefreshing = false
+            }
         }
     }
 

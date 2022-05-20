@@ -43,7 +43,7 @@ class CollectionFragment : BaseFragment(R.layout.fragment_collection) {
                 result
                     .onProgress { showProgress(true) }
                     .onSuccess { list ->
-                        pokemonItemAdapter.setFavouriteItems(list)
+                        pokemonItemAdapter.setAllItems(list)
                     }
                     .onFailure {
                         requireContext().toast(

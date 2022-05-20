@@ -10,11 +10,13 @@
         android:id="@+id/pokemonListText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/title_my_collection"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.Bold.18"
         android:padding="@dimen/indent_24"
-        android:text="Collection"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefresh"
