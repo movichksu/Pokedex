@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    style="@style/Theme.Pokedex.MainComponents">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/flowContainer_fl"
@@ -15,15 +16,14 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/mainFlowBottomNavigation"
+        style="@style/Theme.Pokedex.BottomNavigation"
         android:layout_width="0dp"
         android:layout_height="@dimen/indent_64"
         android:layout_gravity="bottom"
-        android:background="@drawable/background_bottom_navigation"
-        android:elevation="15dp"
-        android:translationZ="5dp"
-        app:itemBackground="@color/white"
+        android:elevation="@dimen/indent_12"
+        android:translationZ="@dimen/indent_4"
         app:itemIconTint="@drawable/selector_item_main_bottom_tabs_icon"
-        app:itemTextAppearanceActive="@style/TextAppearance.Medium.12.Charcoal"
+        app:itemTextAppearanceActive="@style/TextAppearance.Medium.12"
         app:itemTextAppearanceInactive="@style/TextAppearance.Medium.12.OldSilver"
         app:itemTextColor="@drawable/selector_item_main_bottom_tabs"
         app:labelVisibilityMode="labeled"

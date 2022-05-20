@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/dark_blue_start</color>
+    <color name="colorPrimary">@color/dark_black</color>
     <color name="colorPrimaryDark">@color/dark_status</color>
     <color name="colorAccent">@color/blue_snow</color>
     <color name="purple_200">#FFBB86FC</color>
@@ -19,7 +19,7 @@
     <color name="dark">#FF101010</color>
     <color name="blue_snow">#0D95E5</color>
     <color name="blue_nuke_start">#11A8FD</color>
-    <color name="dark_blue_start">#16171B</color>
+    <color name="dark_black">#222226</color>
     <color name="dark_status">#202327</color>
 
     <!-- POKEMON TYPES COLORS -->

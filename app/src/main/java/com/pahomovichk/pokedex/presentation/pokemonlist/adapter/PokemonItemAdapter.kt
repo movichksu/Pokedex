@@ -47,7 +47,7 @@ class PokemonItemAdapter(
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setFavouriteItems(newItems: List<PokemonItem>) {
+    fun setAllItems(newItems: List<PokemonItem>) {
         items.clear()
         items.addAll(newItems)
         notifyDataSetChanged()

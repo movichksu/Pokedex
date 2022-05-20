@@ -65,6 +65,10 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+    <style name="TextAppearance.Medium.18.OldSilver">
+        <item name="android:textColor">@color/old_silver</item>
+    </style>
+
     <!-- TEXT APPEARANCE REGULAR -->
 
     <style name="TextAppearance.Bold">

@@ -26,6 +26,7 @@ import com.pahomovichk.pokedex.databinding.FragmentPokemonDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.pahomovichk.pokedex.presentation.details.adapter.EvolutionsChainAdapter
+import kotlinx.android.synthetic.main.fragment_pokemon_details_evolution.*
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -49,7 +50,7 @@ class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details),
 
     override fun onFirstLaunch() {
         super.onFirstLaunch()
-        viewModel.getEvolutionChain(pokemon.id)
+        viewModel.getEvolutionChain(pokemon.evolution_chain_id)
     }
 
     override fun initUI() {
@@ -97,6 +98,13 @@ class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details),
                     .onProgress { showProgress(true) }
                     .onSuccess { evolutionChain ->
                         evolutionsAdapter.setItems(evolutionChain)
+                        if (evolutionChain.isNotEmpty()) {
+                            evolutionsRecycler.visible()
+                            doesNotEvoluteText.gone()
+                        } else {
+                            evolutionsRecycler.gone()
+                            doesNotEvoluteText.visible()
+                        }
                     }
                     .onFailure {
                         requireContext().toast(
@@ -150,6 +158,8 @@ class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details),
 
     private fun setAboutTabContent(pokemon: PokemonEntity) {
         with(binding.info.aboutTabContent) {
+            aboutText.text = pokemon.description
+            speciesValue.text = pokemon.genera
             heightValue.text = getString(R.string.about_height_value, pokemon.height)
             weightValue.text = getString(R.string.about_weight_value, pokemon.weight)
             var abilities = EMPTY_STRING
@@ -211,6 +221,7 @@ class PokemonDetailsFragment : BaseFragment(R.layout.fragment_pokemon_details),
                 setDrawAxisLine(false)
                 setDrawAxisLine(true)
                 setFitBars(true)
+                textColor = getColor(R.color.old_silver)
                 textSize = CHART_BAR_TEXT_SIZE
                 textAlignment = View.TEXT_ALIGNMENT_TEXT_START
                 position = XAxis.XAxisPosition.BOTTOM

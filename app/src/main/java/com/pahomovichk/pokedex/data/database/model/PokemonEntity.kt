@@ -26,6 +26,8 @@ data class PokemonEntity (
     val dominant_color: DominantColor,
     @ColumnInfo(name = "is_favourite")
     val is_favourite: Boolean,
+    @ColumnInfo(name = "evolution_chain_id")
+    val evolution_chain_id: Int,
     @ColumnInfo(name = "abilities")
     val abilities: List<AbilityX>,
     @ColumnInfo(name = "types")
